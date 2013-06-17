@@ -695,8 +695,9 @@ typedef struct {
     uint32_t max_frame_idx;
 } cam_frame_idx_range_t;
 
-typedef  struct {
-    float aperture_value;
+typedef struct {
+    cam_flash_mode_t flash_mode;
+    float            aperture_value;
 } cam_sensor_params_t;
 
 typedef struct {

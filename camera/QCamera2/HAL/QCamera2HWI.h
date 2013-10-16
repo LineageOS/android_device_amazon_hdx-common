@@ -303,6 +303,9 @@ private:
     void getThumbnailSize(cam_dimension_t &dim);
     int getJpegQuality();
     int getJpegRotation();
+    inline int getFlash(){ return mFlash; }
+    inline int getFlashPresence(){ return mFlashPresence; }
+    inline int getRedeye(){ return mRedEye; }
     QCameraExif *getExifData();
 
     int32_t processAutoFocusEvent(cam_auto_focus_data_t &focus_data);
@@ -446,6 +449,9 @@ private:
     mm_jpeg_exif_params_t mExifParams;
     qcamera_thermal_level_enum_t mThermalLevel;
     bool m_HDRSceneEnabled;
+    int32_t mFlash;
+    int32_t mRedEye;
+    int32_t mFlashPresence;
 };
 
 }; // namespace qcamera

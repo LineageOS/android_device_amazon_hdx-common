@@ -41,6 +41,9 @@ PRODUCT_PACKAGES += lights.msm8974
 # QRNGD
 PRODUCT_PACKAGES += qrngd
 
+# Recovery
+PRODUCT_COPY_FILES += device/amazon/hdx-common/twrp.fstab:recovery/root/etc/twrp.fstab
+
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 

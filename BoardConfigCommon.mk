@@ -1,5 +1,8 @@
 BOARD_VENDOR := amazon
 
+# headers
+TARGET_SPECIFIC_HEADER_PATH := device/amazon/hdx-common/include
+
 # Platform
 TARGET_BOARD_PLATFORM := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
@@ -15,16 +18,8 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 
-# Flags
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
-
-# Recovery
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-
-# QCOM hardware
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_QCOM_AUDIO_VARIANT := caf
-TARGET_QCOM_DISPLAY_VARIANT := caf
+# chargers
+BOARD_CHARGER_RES := device/amazon/hdx-common/charger
 
 # Graphics
 USE_OPENGL_RENDERER := true
@@ -36,48 +31,69 @@ ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Charging mode
-BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
-BOARD_BATTERY_DEVICE_NAME := "battery"
+BOARD_CHARGING_MODE_BOOTING_LPM := 
+BOARD_BATTERY_DEVICE_NAME := "bq27x41"
 
 # Flags for Krait CPU
-COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
-ifneq ($(VARIENT_REQUIRE_3.0_KERNEL),true)
-COMMON_GLOBAL_CFLAGS += -DNEW_ION_API
-endif
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_CPU_VARIANT := krait
+
+# Wifi related defines
+WIFI_BAND := 802_11_ABG
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_HOSTAPD_DRIVER := NL80211
+
+# ATH6KL WLAN
+BOARD_WLAN_DEVICE := qcwcn
+BOARD_HAS_QCOM_WLAN := true
+TARGET_USES_WCNSS_CTRL := true
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_FW_PATH_AP := "ap"
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_QCOM := true
+
+# NFC
+BOARD_HAVE_NFC := false
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 32
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
+# custom liblights (because we basically have none)
+TARGET_PROVIDES_LIBLIGHT := true
+
+# QCOM hardware
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_QCOM_MEDIA_VARIANT := caf-new
+TARGET_QCOM_DISPLAY_VARIANT := caf-new
+BOARD_USES_ALSA_AUDIO := true
+BOARD_USES_LEGACY_ALSA_AUDIO := false
+TARGET_QCOM_AUDIO_VARIANT := caf
+TARGET_USES_QCOM_BSP := true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+
 # Use retire fence from MDP driver
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
-# headers
-TARGET_SPECIFIC_HEADER_PATH := device/amazon/hdx-common/include
-
-# Krait optimizations
-TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
-TARGET_USE_KRAIT_PLD_SET      := true
-TARGET_KRAIT_BIONIC_PLDOFFS   := 10
-TARGET_KRAIT_BIONIC_PLDTHRESH := 10
-TARGET_KRAIT_BIONIC_BBTHRESH  := 64
-TARGET_KRAIT_BIONIC_PLDSIZE   := 64
-
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.baseband=apq user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.baseband=apq user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-# BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --dt device/amazon/hdx-common/dtb.img --tags_offset 0x01e00000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_KERNEL_SEPARATED_DT := true
 
+# Kernel Configs
+TARGET_KERNEL_SOURCE := kernel/amazon/hdx-common
+TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
+
 # Graphics
-TARGET_USES_QCOM_BSP := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 BOARD_EGL_CFG := device/amazon/hdx-common/egl.cfg
 
 # Recovery
@@ -94,7 +110,7 @@ RECOVERY_SDCARD_ON_DATA := true
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TARGET_USERIMAGES_USE_EXT4 := true
-TW_BRIGHTNESS_PATH := /sys/class/backlight/lcd-backlight/brightness
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760

@@ -3,8 +3,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 ## Get non-open-source specific aspects
 $(call inherit-product-if-exists, vendor/amazon/hdx-common/hdx-common-vendor.mk)
 
-## overlays
-DEVICE_PACKAGE_OVERLAYS += device/amazon/hdx-common/overlay
+## AOSP overlay
+DEVICE_PACKAGE_OVERLAYS += device/amazon/hdx-common/overlay/aosp
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi

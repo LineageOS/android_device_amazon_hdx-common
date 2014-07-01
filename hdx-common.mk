@@ -38,6 +38,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Lights
 PRODUCT_PACKAGES += lights.msm8974
 
+# Media config
+PRODUCT_PACKAGES += media_codecs.xml
+
 # QRNGD
 PRODUCT_PACKAGES += qrngd
 

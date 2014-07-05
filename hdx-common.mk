@@ -172,8 +172,8 @@ PRODUCT_PACKAGES += \
 
 # QRNGD
 PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
+    qrngd
+#    qrngp
 
 # Recovery
 PRODUCT_COPY_FILES += $(COMMON_FOLDER)/twrp.fstab:recovery/root/etc/twrp.fstab

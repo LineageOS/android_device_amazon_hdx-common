@@ -79,6 +79,9 @@ TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_USES_QCOM_BSP := true
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
+# Temporary
+USE_CAMERA_STUB := true
+
 # Use retire fence from MDP driver
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 

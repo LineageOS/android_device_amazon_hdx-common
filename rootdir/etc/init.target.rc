@@ -26,6 +26,7 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
+import init.amon.rc
 
 on early-init
     mkdir /firmware 0771 system system
@@ -33,6 +34,8 @@ on early-init
     symlink /data/tombstones /tombstones
     setprop ro.sf.lcd_density 320
     setprop ro.hw.nav_keys 0
+    chown system system /sys/devices/virtual/graphics/fb0/ad
+    chown system system /sys/devices/virtual/graphics/fb1/ad
 
 on init
     export BOOTCLASSPATH ${BOOTCLASSPATH}:/system/framework/qcmediaplayer.jar:/system/framework/WfdCommon.jar:/system/framework/oem-services.jar:/system/framework/dolby_ds.jar
@@ -299,6 +302,11 @@ service printemmcinfo /system/bin/PrintEmmcInfo
 on property:sys.boot_completed=1
 	start printemmcinfo
 
+on property:wlan.driver.status=ok
+	chown system system /sys/kernel/debug/ieee80211/phy0/ath6kl/wow_pattern
+	chown system system /sys/kernel/debug/ieee80211/phy0/ath6kl/pattern_gen
+	chown system system /sys/kernel/debug/ieee80211/phy0/ath6kl/dtim_ext
+
 service battery_log /system/bin/battery_log.sh
 	class late_start
 	user system
@@ -326,7 +334,7 @@ service kmsg_log /system/bin/kmsg_log.sh
 	oneshot
 	disabled
 
-service trigger_prov /system/bin/sh /system/bin/check_prov.sh
+service trigger_prov /system/bin/sh /sbin/check_prov.sh
     class late_start
     user root
     oneshot

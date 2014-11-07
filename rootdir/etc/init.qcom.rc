@@ -150,7 +150,7 @@ on boot
 # msm specific files that need to be created on /data
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
+    mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -233,6 +233,16 @@ on post-fs-data
     mkdir /data/system/sensors 0771 system system
     mkdir /persistbackup/misc 0771 system system
     mkdir /persistbackup/misc/sensors 0771 system system
+
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/temp_comp
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/reg_read
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/stage_info
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/autotune
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/filp_config
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/calibrate
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/davetune
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/status
+    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/reg_write
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init

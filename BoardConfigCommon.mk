@@ -71,8 +71,8 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_QCOM_MEDIA_VARIANT := caf-new
-TARGET_QCOM_DISPLAY_VARIANT := caf-new
+TARGET_QCOM_MEDIA_VARIANT := caf
+TARGET_QCOM_DISPLAY_VARIANT := caf
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_LEGACY_ALSA_AUDIO := false
 TARGET_QCOM_AUDIO_VARIANT := caf
@@ -83,7 +83,8 @@ TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 USE_CAMERA_STUB := true
 
 # Use retire fence from MDP driver
-TARGET_DISPLAY_USE_RETIRE_FENCE := true
+TARGET_DISPLAY_USE_RETIRE_FENCE := false
+#TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.baseband=apq user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive

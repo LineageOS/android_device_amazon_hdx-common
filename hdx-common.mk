@@ -43,11 +43,22 @@ PRODUCT_BOOT_JARS += qcmediaplayer
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.rc \
-    init.qcom.usb.rc \
-    init.target.rc \
-    ueventd.qcom.rc
+	fstab.qcom \
+	init.qcom.rc \
+	init.qcom.usb.rc \
+	init.target.rc \
+	ueventd.qcom.rc \
+	init.class_main.sh \
+	init.mdm.sh \
+	init.qcom.class_core.sh \
+	init.qcom.early_boot.sh \
+	init.qcom.factory.sh \
+	init.qcom.sensor.sh \
+	init.qcom.sh \
+	init.qcom.ssr.sh \
+	init.qcom.syspart_fixup.sh \
+	init.qcom.usb.sh
+    
 
 # Audio
 PRODUCT_PACKAGES += \

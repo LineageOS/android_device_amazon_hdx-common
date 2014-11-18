@@ -42,15 +42,15 @@
 /dev/smd6                 0660   system     system
 /dev/smd7                 0660   bluetooth  bluetooth
 
+# permission for ehci itc device
+/dev/ehci_itc		  0660   media      system
+
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
 
-#permission for ehci itc device
-/dev/ehci_itc             0660   media      system
-
-/dev/radio0               0640   system     system
+/dev/radio0               0640   fm_radio   fm_radio
+/dev/ath_lpm		  0660   bluetooth  bluetooth
 /dev/rfcomm0              0660   bluetooth  bluetooth
-# /dev/ttyUSB0              0660   bluetooth  bluetooth
 /dev/smdcntl0             0640   radio      radio
 /dev/smdcntl1             0640   radio      radio
 /dev/smdcntl2             0640   radio      radio
@@ -59,15 +59,6 @@
 /dev/smdcntl5             0640   radio      radio
 /dev/smdcntl6             0640   radio      radio
 /dev/smdcntl7             0640   radio      radio
-/dev/smdcnt_rev0          0640   radio      radio
-/dev/smdcnt_rev1          0640   radio      radio
-/dev/smdcnt_rev2          0640   radio      radio
-/dev/smdcnt_rev3          0640   radio      radio
-/dev/smdcnt_rev4          0640   radio      radio
-/dev/smdcnt_rev5          0640   radio      radio
-/dev/smdcnt_rev6          0640   radio      radio
-/dev/smdcnt_rev7          0640   radio      radio
-/dev/smdcnt_rev8          0640   radio      radio
 /dev/smuxctl32            0640   radio      radio
 /dev/sdioctl0             0640   radio      radio
 /dev/sdioctl1             0640   radio      radio
@@ -83,22 +74,6 @@
 /dev/hsicctl1             0640   radio      radio
 /dev/hsicctl2             0640   radio      radio
 /dev/hsicctl3             0640   radio      radio
-/dev/hsicctl4             0640   radio      radio
-/dev/hsicctl5             0640   radio      radio
-/dev/hsicctl6             0640   radio      radio
-/dev/hsicctl7             0640   radio      radio
-/dev/hsicctl8             0640   radio      radio
-/dev/hsicctl9             0640   radio      radio
-/dev/hsicctl10            0640   radio      radio
-/dev/hsicctl11            0640   radio      radio
-/dev/hsicctl12            0640   radio      radio
-/dev/hsicctl13            0640   radio      radio
-/dev/hsicctl14            0640   radio      radio
-/dev/hsicctl15            0640   radio      radio
-/dev/hsicctl16            0640   radio      radio
-/dev/mhi_pipe_14          0640   radio      radio
-/dev/mhi_pipe_16          0640   radio      radio
-/dev/mhi_pipe_32          0640   radio      radio
 /dev/video*               0660   system     camera
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
@@ -107,7 +82,6 @@
 /dev/jpeg0                0660   system     camera
 /dev/jpeg1                0660   system     camera
 /dev/jpeg2                0660   system     camera
-/dev/adsprpc-smd          0664   system     system
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -116,11 +90,10 @@
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
-/dev/hw_random            0600   root       root
+/dev/hw_random            0660   system     system
 /dev/adsprpc-smd          0664   system     system
 
 #permissions for audio
-/dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
 /dev/msm_evrc             0660   system     audio
 /dev/msm_wma              0660   system     audio
@@ -145,11 +118,9 @@
 /dev/msm_rtac             0660   system     audio
 /dev/msm_voicememo        0660   system     audio
 /dev/radio0               0640   fm_radio   fm_radio
-/dev/smd3                 0660   bluetooth  net_bt_stack
-/dev/smd2                 0660   bluetooth  net_bt_stack
-/dev/ath_lpm              0660   bluetooth  bluetooth
+/dev/smd3                 0660   bluetooth  bluetooth
+/dev/smd2                 0660   bluetooth  bluetooth
 /dev/ttyHSL1              0660   system     system
-/dev/ttyHS1               0660   system     system
 /dev/mdm                  0660   system     radio
 /sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
 /dev/sdio_tty_ciq_00      0660   system     system
@@ -158,37 +129,12 @@
 /dev/i2c-5                0660   media       media
 
 # DVB devices
-/dev/dvb/adapter0/demux*  0440   media       media
-/dev/dvb/adapter0/dvr*    0660   media       media
-/dev/dvb/adapter0/video*  0660   media       media
-
-# Broadcast devices
-/dev/tsc_mux0             0660   media       media
-/dev/tsc_ci0              0660   media       media
+/dev/dvb/adapter0/demux*  0444   media       media
+/dev/dvb/adapter0/dvr*    0664   media       media
+/dev/dvb/adapter0/video*  0664   media       media
 
 # sensors
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
-/sys/devices/f9925000.i2c/i2c-0/0-* enable          0660     input     system
-/sys/devices/f9925000.i2c/i2c-0/0-* poll_delay      0660     input     system
-/sys/devices/virtual/optical_sensors/proximity      ps_adc         0660    input    system
-/sys/devices/virtual/optical_sensors/proximity      ps_poll_delay  0660    input    system
-/sys/devices/virtual/optical_sensors/lightsensor    ls_auto        0660    input    system
-/sys/devices/virtual/optical_sensors/lightsensor    ls_poll_delay  0660    input    system
-/sys/devices/virtual/input/input*                   poll           0660    input    system
-/sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
 # wlan
 /dev/wcnss_wlan           0660   system     system
-#nfc permissions
-/dev/nfc-nci              0660    nfc         nfc
-
-# BRCM : BT
-/dev/ttyHS99              0660   bluetooth  net_bt_stack
-
-# UIO devices
-/dev/uio0                 0660   system     system
-/dev/uio1                 0660   system     system
-/dev/uio2                 0660   system     system
-
-# ESOC devices
-/dev/subsys_esoc*         0640   system     radio

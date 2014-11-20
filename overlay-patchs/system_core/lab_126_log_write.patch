@@ -1,0 +1,39 @@
+
+project system/core/
+diff --git a/libcutils/klog.c b/libcutils/klog.c
+old mode 100644
+new mode 100755
+index d69fb10..74551b0
+--- a/libcutils/klog.c
++++ b/libcutils/klog.c
+@@ -25,6 +25,10 @@
+ 
+ #include <cutils/klog.h>
+ 
++#ifdef AMZ_HDX
++extern int lab126_log_write(int prio, const char *tag, const char *msg);
++#endif
++
+ static int klog_fd = -1;
+ static int klog_level = KLOG_DEFAULT_LEVEL;
+ 
+diff --git a/liblog/logd_write.c b/liblog/logd_write.c
+old mode 100644
+new mode 100755
+index a2b9424..e11bd6b
+--- a/liblog/logd_write.c
++++ b/liblog/logd_write.c
+@@ -245,6 +245,13 @@ static int __write_to_log_init(log_id_t log_id, struct iovec *vec, size_t nr)
+     return write_to_log(log_id, vec, nr);
+ }
+ 
++#ifdef AMZ_HDX
++int lab126_log_write(int prio, const char *tag, const char *msg)
++{
++	return -1;
++}
++#endif
++
+ int __android_log_write(int prio, const char *tag, const char *msg)
+ {
+     struct iovec vec[3];

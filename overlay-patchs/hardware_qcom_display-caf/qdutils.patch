@@ -1,0 +1,36 @@
+
+project hardware/qcom/display-caf/
+diff --git a/libqdutils/mdp_version.cpp b/libqdutils/mdp_version.cpp
+old mode 100644
+new mode 100755
+index 0511a70..337bb1b
+--- a/libqdutils/mdp_version.cpp
++++ b/libqdutils/mdp_version.cpp
+@@ -107,7 +107,7 @@ bool MDPVersion::is8x26() {
+     //                                        0000   -  minor number
+     // 8x26 v1 minor number is 0000
+     //      v2 minor number is 0001 etc..
+-    if( mMdpRev >= MDSS_MDP_HW_REV_101 && mMdpRev < MDSS_MDP_HW_REV_102) {
++    if( mMdpRev >= _MDSS_MDP_HW_REV_101 && mMdpRev < _MDSS_MDP_HW_REV_102) {
+         return true;
+     }
+     return false;
+diff --git a/libqdutils/mdp_version.h b/libqdutils/mdp_version.h
+old mode 100644
+new mode 100755
+index eb33d3f..ad08101
+--- a/libqdutils/mdp_version.h
++++ b/libqdutils/mdp_version.h
+@@ -53,9 +53,9 @@ enum mdp_version {
+ };
+ 
+ enum mdp_rev {
+-    MDSS_MDP_HW_REV_100 = 0x10000000,
+-    MDSS_MDP_HW_REV_101 = 0x10010000, //8x26
+-    MDSS_MDP_HW_REV_102 = 0x10020000,
++    _MDSS_MDP_HW_REV_100 = 0x10000000,
++    _MDSS_MDP_HW_REV_101 = 0x10010000, //8x26
++    _MDSS_MDP_HW_REV_102 = 0x10020000,
+ };
+ 
+ #define MDDI_PANEL       '1'

@@ -1,5 +1,15 @@
 COMMON_FOLDER := device/amazon/hdx-common
 
+($error TODO)
+ln -s /data/misc/audio/mbhc.bin /system/etc/firmware/wcd9320/wcd9320_mbhc.bin
+ln -s /data/misc/audio/wcd9320_anc.bin /system/etc/firmware/wcd9320/wcd9320_anc.bin
+ln -s /data/misc/audio/wcd9320_mad_audio.bin /system/etc/firmware/wcd9320/wcd9320_mad_audio.bin
+ln -s /data/misc/wifi/WCNSS_qcom_cfg.ini /system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
+ln -s /persist/WCNSS_qcom_wlan_nv.bin /system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
+ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
+ln -s /system/etc/firmware/ath6k/AR6004/hw3.0/boardData_Thor_FCC.bin /system/etc/firmware/ath6k/AR6004/hw3.0/bdata.bin
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
@@ -94,7 +104,10 @@ PRODUCT_PACKAGES += \
     gralloc.msm8974 \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
-    liboverlay
+    liboverlay \
+    libqdutils \
+    libqservice \
+    libqdMetaData
 
 # GPS
 PRODUCT_PACKAGES += \

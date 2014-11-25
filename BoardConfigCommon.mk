@@ -19,21 +19,21 @@ TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.baseband=apq user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.baseband=apq user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
-BOARD_KERNEL_SEPARATED_DT := true
+#BOARD_KERNEL_SEPARATED_DT := true
 # Kernel Configs
-TARGET_KERNEL_SOURCE := kernel/qcom/msm8974
+#TARGET_KERNEL_SOURCE := kernel/qcom/msm8974
 #kernel/amazon/hdx-common
-TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
+#TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
+
 # Flags for Krait CPU
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 # Flags
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DAMZ_HDX
-# -DDUAL_DSI <- NO !
 #COMMON_GLOBAL_CFLAGS += -DQCOM_BSP -DNEEDS_VECTORIMPL_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
@@ -90,8 +90,11 @@ BOARD_HAS_QCOM_WLAN := true
 TARGET_USES_WCNSS_CTRL := true
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
+WIFI_DRIVER_FW_PATH_P2P := "p2p"
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/ath6kl-3.5/ath6kl_usb.ko"
+WIFI_DRIVER_MODULE_NAME := "ath6kl_usb"
 
 # NFC
 BOARD_HAVE_NFC := false

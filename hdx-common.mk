@@ -1,15 +1,5 @@
 COMMON_FOLDER := device/amazon/hdx-common
 
-($error TODO)
-ln -s /data/misc/audio/mbhc.bin /system/etc/firmware/wcd9320/wcd9320_mbhc.bin
-ln -s /data/misc/audio/wcd9320_anc.bin /system/etc/firmware/wcd9320/wcd9320_anc.bin
-ln -s /data/misc/audio/wcd9320_mad_audio.bin /system/etc/firmware/wcd9320/wcd9320_mad_audio.bin
-ln -s /data/misc/wifi/WCNSS_qcom_cfg.ini /system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
-ln -s /persist/WCNSS_qcom_wlan_nv.bin /system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
-ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
-ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
-ln -s /system/etc/firmware/ath6k/AR6004/hw3.0/boardData_Thor_FCC.bin /system/etc/firmware/ath6k/AR6004/hw3.0/bdata.bin
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Get non-open-source specific aspects
@@ -51,7 +41,6 @@ PRODUCT_PACKAGES += \
 	init.qcom.rc \
 	init.qcom.usb.rc \
 	init.target.rc \
-	ueventd.qcom.rc \
 	init.class_main.sh \
 	init.mdm.sh \
 	init.qcom.class_core.sh \
@@ -61,7 +50,8 @@ PRODUCT_PACKAGES += \
 	init.qcom.sh \
 	init.qcom.ssr.sh \
 	init.qcom.syspart_fixup.sh \
-	init.qcom.usb.sh
+	init.qcom.usb.sh \
+	ueventd.qcom.rc
 
 # Media config
 PRODUCT_COPY_FILES += \
@@ -72,17 +62,17 @@ PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/twrp.fstab:recovery/root/etc/twrp.fstab
 
 PRODUCT_PACKAGES += \
-    audiod \
     audio.a2dp.default \
     audio_policy.msm8974 \
     audio.primary.msm8974 \
     audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler \
-    libqcompostprocbundle \
-    libqcomvisualizer \
-    libqcomvoiceprocessing \
-    tinymix
+    libaudio-resampler
+#    libqcompostprocbundle \
+#    libqcomvisualizer \
+#    libqcomvoiceprocessing \
+#    tinymix
+#   audiod \
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -96,7 +86,8 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 PRODUCT_PACKAGES += \
-    libxml2
+ 	libxml2 \
+	libnetcmdiface
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -143,8 +134,8 @@ PRODUCT_PACKAGES += \
     qrngp
 
 # Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8974
+#PRODUCT_PACKAGES += \
+#    keystore.msm8974
 
 # USB
 PRODUCT_PACKAGES += \
@@ -222,3 +213,20 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk
 
 # call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+
+# links !
+#$(shell \
+#	mkdir -p /system/etc/firmware/wcd9320; \
+#	mkdir -p /system/etc/firmware/wlan/prima; \
+#	mkdir -p /system/etc/firmware/ath6k/AR6004)
+#$(shell \
+#	ln -s /system/etc/wifi/wpa_supplicant_ath6kl.conf /system/etc/wifi/wpa_supplicant.conf; \
+#	ln -s /data/misc/audio/mbhc.bin /system/etc/firmware/wcd9320/wcd9320_mbhc.bin; \
+#	ln -s /data/misc/audio/wcd9320_anc.bin /system/etc/firmware/wcd9320/wcd9320_anc.bin; \
+#	ln -s /data/misc/audio/wcd9320_mad_audio.bin /system/etc/firmware/wcd9320/wcd9320_mad_audio.bin; \
+#	ln -s /data/misc/wifi/WCNSS_qcom_cfg.ini /system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini; \
+#	ln -s /persist/WCNSS_qcom_wlan_nv.bin /system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin; \
+#	ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin; \
+#	ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin; \
+#	ln -s /system/etc/firmware/ath6k/AR6004/hw3.0/boardData_Thor_FCC.bin /system/etc/firmware/ath6k/AR6004/hw3.0/bdata.bin)
+

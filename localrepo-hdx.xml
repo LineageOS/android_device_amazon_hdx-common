@@ -9,8 +9,9 @@
 	<project path="hardware/qcom/display-caf-hdx" name="Cpasjuste/hardware_qcom_display-caf-hdx" remote="github" revision="cm-11.0" />
 	<project path="hardware/qcom/media-caf-hdx" name="Cpasjuste/hardware_qcom_media-caf-hdx" remote="github" revision="cm-11.0" />
 
-	<!-- amazon hdx devices -->
+	<!-- amazon hdx devices (disabled for manual push) -->
+	<!--
 	<project path="device/amazon/hdx-common" name="Cpasjuste/android_device_amazon_hdx-common" remote="github" revision="cm-11.0" />
 	<project path="device/amazon/thor" name="Cpasjuste/android_device_amazon_thor" remote="github" revision="cm-11.0" />
-
+	-->
 </manifest>

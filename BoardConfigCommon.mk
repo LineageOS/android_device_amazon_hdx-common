@@ -115,6 +115,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 USE_CAMERA_STUB := true
 
 # Recovery
+SKIP_SET_METADATA := true # https://github.com/legaCyMod/android_build/commit/f0df153b707e9403a3e695f659fbfcd6417cba15
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true

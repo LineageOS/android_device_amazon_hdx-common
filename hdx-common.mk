@@ -6,7 +6,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product-if-exists, vendor/amazon/hdx-common/hdx-common-vendor.mk)
 
 # AOSP overlay
-DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay/aosp
+DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay-common
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
@@ -14,7 +14,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
@@ -54,8 +54,8 @@ PRODUCT_PACKAGES += \
 	ueventd.qcom.rc
 
 # Media config
-PRODUCT_COPY_FILES += \
-	$(COMMON_FOLDER)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+#PRODUCT_COPY_FILES += \
+#	$(COMMON_FOLDER)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
 
 # Recovery
 PRODUCT_COPY_FILES += \

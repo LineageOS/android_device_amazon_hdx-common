@@ -1,0 +1,56 @@
+<6>[ 5535.436041] max97236 12-0040: ***** max97236_interrupt *****
+<6>[ 5536.727085] max97236 12-0040: 0x8C, 0x30, 0x02, 0x01 - HEADSET
+<6>[ 5536.851744] max97236_headset_mic_event: event SND_SOC_DAPM_PRE_PMU
+<6>[ 5537.007626] max97236 12-0040: ***** max97236_interrupt *****
+<6>[ 5537.018498] max97236 12-0040: SND_JACK_BTN_0 PRESS
+<6>[ 5537.595659] event_handler: reclaimed all bufs
+<6>[ 5537.617165] max97236_headset_mic_event: event SND_SOC_DAPM_POST_PMD
+<3>[ 5538.010218] taiko_codec taiko_codec: Failed to get mbhc impedance -22
+<6>[ 5538.092948] max97236_headset_mic_event: event SND_SOC_DAPM_PRE_PMU
+
+I/InputManager(  873): Initializing input manager, mUseDevInputEventForAudioJack=false
+I/SystemServer(  873): Window Manager
+I/WindowManager(  873): No existing display settings /data/system/display_settings.xml; starting empty
+D/EventHub(  873): No input device configuration file found for device 'msm8974-taiko-tablet-snd-card JACK'.
+D/BluetoothManagerService(  873): Loading stored name and address
+D/BluetoothManagerService(  873): Stored bluetooth Name=Kindle Fire HDX,Address=00:BB:3A:83:19:CD
+W/EventHub(  873): Unable to disable kernel key repeat for /dev/input/event4: Function not implemented
+I/EventHub(  873): New device: id=1, fd=102, path='/dev/input/event4', name='msm8974-taiko-tablet-snd-card JACK', classes=0x81, configuration='', keyLayout='/system/usr/keylayout/msm8974-taiko-tablet-snd-card_JACK.kl', keyCharacterMap='/system/usr/keychars/Generic.kcm', builtinKeyboard=false, usingSuspendBlockIoctl=true, usingClockIoctl=true
+
+root@thor:/ # ls -l /data/misc/audio/                                          
+-rw------- media    audio         154 2014-11-22 21:37 mbhc.bin
+-rw------- media    audio        2504 2014-11-22 21:37 wcd9320_anc.bin
+
+s -l /etc/firmware/ar3k/1020201/                                              <
+-rw-r--r-- root     root         1753 2014-10-03 03:29 PS_ASIC.pst
+-rw-r--r-- root     root        94317 2014-10-03 03:29 RamPatch.txt
+
+root@thor:/ # ls -l /etc/firmware/                                             
+-rw-r--r-- root     root         1156 2014-10-03 03:29 a225_pfp.fw
+-rw-r--r-- root     root         9220 2014-10-03 03:29 a225_pm4.fw
+-rw-r--r-- root     root         9220 2014-10-03 03:29 a225p5_pm4.fw
+-rw-r--r-- root     root         1156 2014-10-03 03:29 a300_pfp.fw
+-rw-r--r-- root     root         9220 2014-10-03 03:29 a300_pm4.fw
+-rw-r--r-- root     root         2212 2014-10-03 03:29 a330_pfp.fw
+-rw-r--r-- root     root         9220 2014-10-03 03:29 a330_pm4.fw
+drwxr-xr-x root     root              1970-01-01 09:44 ar3k
+drwxr-xr-x root     root              1970-01-01 09:44 ath6k
+-rw-r--r-- root     root        16128 2014-10-03 03:29 cpp_firmware_v1_1_1.fw
+-rw-r--r-- root     root        16384 2014-10-03 03:29 cpp_firmware_v1_1_6.fw
+-rw-r--r-- root     root        16384 2014-10-03 03:29 cpp_firmware_v1_2_0.fw
+lrwxrwxrwx root     root              1970-01-01 09:44 dxhdcp2.b00 -> /firmware/image/dxhdcp2.b00
+lrwxrwxrwx root     root              1970-01-01 09:44 dxhdcp2.b01 -> /firmware/image/dxhdcp2.b01
+lrwxrwxrwx root     root              1970-01-01 09:44 dxhdcp2.b02 -> /firmware/image/dxhdcp2.b02
+lrwxrwxrwx root     root              1970-01-01 09:44 dxhdcp2.b03 -> /firmware/image/dxhdcp2.b03
+lrwxrwxrwx root     root              1970-01-01 09:44 dxhdcp2.mdt -> /firmware/image/dxhdcp2.mdt
+-rw-r--r-- root     root         1156 2014-10-03 03:29 leia_pfp_470.fw
+-rw-r--r-- root     root         9220 2014-10-03 03:29 leia_pm4_470.fw
+-rw-r--r-- root     root          212 2014-10-03 03:29 venus.b00
+-rw-r--r-- root     root         6600 2014-10-03 03:29 venus.b01
+-rw-r--r-- root     root       825780 2014-10-03 03:29 venus.b02
+-rw-r--r-- root     root         3844 2014-10-03 03:29 venus.b03
+-rw-r--r-- root     root           32 2014-10-03 03:29 venus.b04
+-rw-r--r-- root     root       841944 2014-10-03 03:29 venus.mbn
+-rw-r--r-- root     root         6812 2014-10-03 03:29 venus.mdt
+drwxr-xr-x root     root              1970-01-01 09:44 wcd9320
+drwxr-xr-x root     root              1970-01-01 09:44 wlan

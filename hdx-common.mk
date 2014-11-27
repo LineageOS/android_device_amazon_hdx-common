@@ -174,7 +174,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
     ro.opengles.version=196608 \
     persist.timed.enable=true \
-    keyguard.no_require_sim=true
+    keyguard.no_require_sim=true \
+    lockscreen.rot_override=true
 
 # Radio props
 PRODUCT_PROPERTY_OVERRIDES += \

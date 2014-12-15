@@ -1,0 +1,17 @@
+
+project frameworks/av/
+diff --git a/media/libstagefright/Android.mk b/media/libstagefright/Android.mk
+index 5e0ed1d..33c3818 100644
+--- a/media/libstagefright/Android.mk
++++ b/media/libstagefright/Android.mk
+@@ -176,8 +176,8 @@ LOCAL_SRC_FILES += ExtendedCodec.cpp ExtendedExtractor.cpp ExtendedUtils.cpp
+ ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS),true)
+     LOCAL_CFLAGS     += -DENABLE_AV_ENHANCEMENTS
+     LOCAL_SRC_FILES  += ExtendedMediaDefs.cpp ExtendedPrefetchSource.cpp ExtendedWriter.cpp
+-    LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+-    LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
++#    LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
++#    LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+ 
+     LOCAL_C_INCLUDES += \
+         $(call project-path-for,qcom-media)/mm-core/inc

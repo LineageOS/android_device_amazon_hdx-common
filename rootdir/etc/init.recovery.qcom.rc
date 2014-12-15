@@ -1,0 +1,4 @@
+on init
+    chmod 0775 /sbin/qseecomd
+
+service qseecomd /sbin/qseecomd

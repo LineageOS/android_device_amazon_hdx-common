@@ -18,16 +18,13 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
-# Kernel
-#BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.baseband=apq user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.selinux=permissive
+
+# Kernel -> use prebuilt kernel ...
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 #BOARD_KERNEL_SEPARATED_DT := true
-# Kernel Configs
-#TARGET_KERNEL_SOURCE := kernel/qcom/msm8974
-#kernel/amazon/hdx-common
-#TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
 # Flags for Krait CPU
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
@@ -63,8 +60,8 @@ BOARD_EGL_CFG := device/amazon/hdx-common/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_OVERLAY := true
-TARGET_USES_ION := true
-TARGET_USES_NEW_ION_API :=true
+TARGET_USES_ION := false
+TARGET_USES_NEW_ION_API := false
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_HARDWARE_3D := false
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
@@ -87,6 +84,13 @@ WIFI_BAND := 802_11_ABG
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
+
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0xA00000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0xA00000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1308622848
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 12549340160
+BOARD_FLASH_BLOCK_SIZE := 131072
 
 # ATH6KL WLAN
 BOARD_WLAN_DEVICE := qcwcn
@@ -114,7 +118,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Temporary
 USE_CAMERA_STUB := true
 
-# Recovery
+# CWM Recovery
 SKIP_SET_METADATA := true # https://github.com/legaCyMod/android_build/commit/f0df153b707e9403a3e695f659fbfcd6417cba15
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_USES_MMCUTILS := true
@@ -123,7 +127,7 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/rootdir/etc/fstab.qcom
 
-# TWRP
+# TWRP Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
@@ -132,9 +136,3 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27x41
 
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1308622848
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12549340160
-BOARD_FLASH_BLOCK_SIZE := 131072

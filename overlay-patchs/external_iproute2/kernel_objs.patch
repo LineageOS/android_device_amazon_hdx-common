@@ -1,0 +1,18 @@
+
+project external/iproute2/
+diff --git a/tc/Android.mk b/tc/Android.mk
+index 460850e..a752679 100644
+--- a/tc/Android.mk
++++ b/tc/Android.mk
+@@ -18,9 +18,9 @@ LOCAL_SYSTEM_SHARED_LIBRARIES := \
+ LOCAL_SHARED_LIBRARIES += libiprouteutil libnetlink
+ 
+ ifeq ($(call is-vendor-board-platform,QCOM),true)
+-LOCAL_C_INCLUDES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
++#LOCAL_C_INCLUDES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+ LOCAL_C_INCLUDES += external/iproute2/include
+-LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
++#LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+ LOCAL_CFLAGS := -DFEATURE_PRIO
+ else
+ LOCAL_C_INCLUDES := $(KERNEL_HEADERS) external/iproute2/include

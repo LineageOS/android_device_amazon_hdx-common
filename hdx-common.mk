@@ -51,7 +51,8 @@ PRODUCT_PACKAGES += \
 	init.qcom.ssr.sh \
 	init.qcom.syspart_fixup.sh \
 	init.qcom.usb.sh \
-	ueventd.qcom.rc
+	ueventd.qcom.rc \
+	init.recovery.qcom.rc
 
 # Media config
 #PRODUCT_COPY_FILES += \

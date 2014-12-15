@@ -282,6 +282,10 @@ on post-fs-data
     chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/status
     chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/reg_write
 
+    # fix audit daemon
+    mkdir /data/misc/audit 0777 audit system
+    chmod 0777 /data/misc/audit
+
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
    class late_start

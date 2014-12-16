@@ -54,9 +54,14 @@ PRODUCT_PACKAGES += \
 	ueventd.qcom.rc \
 	init.recovery.qcom.rc
 
-# Media config
-#PRODUCT_COPY_FILES += \
-#	$(COMMON_FOLDER)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+# Safestrap compatibility
+PRODUCT_COPY_FILES += \
+	$(COMMON_FOLDER)/rootdir/etc/fstab.qcom:system/etc/rootfs/fstab.qcom \
+	$(COMMON_FOLDER)/rootdir/etc/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
+	$(COMMON_FOLDER)/rootdir/ss/init.rc:system/etc/rootfs/init.rc \
+	$(COMMON_FOLDER)/rootdir/ss/init.cm.rc:system/etc/rootfs/init.cm.rc \
+	$(COMMON_FOLDER)/rootdir/ss/init.environ.rc:system/etc/rootfs/init.environ.rc \
+	$(COMMON_FOLDER)/rootdir/ss/init.superuser.rc:system/etc/rootfs/init.superuser.rc
 
 # Recovery
 PRODUCT_COPY_FILES += \
@@ -69,11 +74,6 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler
-#    libqcompostprocbundle \
-#    libqcomvisualizer \
-#    libqcomvoiceprocessing \
-#    tinymix
-#   audiod \
 
 # Charger
 PRODUCT_PACKAGES += \

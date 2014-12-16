@@ -67,13 +67,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/twrp.fstab:recovery/root/etc/twrp.fstab
 
+# Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio_policy.msm8974 \
     audio.primary.msm8974 \
     audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler
+    libaudio-resampler \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing
 
 # Charger
 PRODUCT_PACKAGES += \

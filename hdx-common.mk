@@ -58,6 +58,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/rootdir/etc/fstab.qcom:system/etc/rootfs/fstab.qcom \
 	$(COMMON_FOLDER)/rootdir/etc/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
+	$(COMMON_FOLDER)/rootdir/etc/init.target.rc:system/etc/rootfs/init.target.rc \
 	$(COMMON_FOLDER)/rootdir/ss/init.rc:system/etc/rootfs/init.rc \
 	$(COMMON_FOLDER)/rootdir/ss/init.cm.rc:system/etc/rootfs/init.cm.rc \
 	$(COMMON_FOLDER)/rootdir/ss/init.environ.rc:system/etc/rootfs/init.environ.rc \

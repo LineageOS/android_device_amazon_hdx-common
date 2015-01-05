@@ -54,16 +54,6 @@ PRODUCT_PACKAGES += \
 	ueventd.qcom.rc \
 	init.recovery.qcom.rc
 
-# Safestrap compatibility
-PRODUCT_COPY_FILES += \
-	$(COMMON_FOLDER)/rootdir/etc/fstab.qcom:system/etc/rootfs/fstab.qcom \
-	$(COMMON_FOLDER)/rootdir/etc/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
-	$(COMMON_FOLDER)/rootdir/etc/init.target.rc:system/etc/rootfs/init.target.rc \
-	$(COMMON_FOLDER)/rootdir/ss/init.rc:system/etc/rootfs/init.rc \
-	$(COMMON_FOLDER)/rootdir/ss/init.cm.rc:system/etc/rootfs/init.cm.rc \
-	$(COMMON_FOLDER)/rootdir/ss/init.environ.rc:system/etc/rootfs/init.environ.rc \
-	$(COMMON_FOLDER)/rootdir/ss/init.superuser.rc:system/etc/rootfs/init.superuser.rc
-
 # Recovery
 PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/twrp.fstab:recovery/root/etc/twrp.fstab
@@ -156,8 +146,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += qcmediaplayer
 
-
-
 # Wifi
 #PRODUCT_PACKAGES += \
 #    libnetcmdiface \
@@ -228,8 +216,4 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui
 #	ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
 #	ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
 #	ln -s /system/etc/firmware/ath6k/AR6004/hw3.0/boardData_Thor_FCC.bin /system/etc/firmware/ath6k/AR6004/hw3.0/bdata.bin
-###############################
-#	ln -s /data/misc/audio/mbhc.bin /system/etc/firmware/wcd9320/wcd9320_mbhc.bin
-#	ln -s /data/misc/audio/wcd9320_anc.bin /system/etc/firmware/wcd9320/wcd9320_anc.bin; \
-#	ln -s /data/misc/audio/wcd9320_mad_audio.bin /system/etc/firmware/wcd9320/wcd9320_mad_audio.bin; \
 

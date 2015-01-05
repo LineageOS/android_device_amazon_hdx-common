@@ -21,6 +21,73 @@
      for different hardware and product builds. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <bool name="config_automatic_brightness_available">true</bool>
+
+    <integer-array name="config_autoBrightnessLevels">
+        <item>10</item>
+        <item>26</item>
+        <item>66</item>
+        <item>82</item>
+        <item>133</item>
+        <item>166</item>
+        <item>266</item>
+        <item>300</item>
+        <item>433</item>
+        <item>466</item>
+        <item>600</item>
+        <item>650</item>
+        <item>867</item>
+        <item>900</item>
+        <item>1300</item>
+        <item>2200</item>
+        <item>6000</item>
+        <item>9000</item>
+    </integer-array>
+
+    <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>90</item>
+        <item>100</item>
+        <item>120</item>
+        <item>139</item>
+        <item>151</item>
+        <item>154</item>
+        <item>161</item>
+        <item>169</item>
+        <item>174</item>
+        <item>176</item>
+        <item>202</item>
+        <item>221</item>
+        <item>241</item>
+        <item>255</item>
+    </integer-array>
+
+    <!-- Whether WiFi display is supported by this device.
+         There are many prerequisites for this feature to work correctly.
+         Here are a few of them:
+         * The WiFi radio must support WiFi P2P.
+         * The WiFi radio must support concurrent connections to the WiFi display and
+           to an access point.
+         * The Audio Flinger audio_policy.conf file must specify a rule for the "r_submix"
+           remote submix module.  This module is used to record and stream system
+           audio output to the WiFi display encoder in the media server.
+         * The remote submix module "audio.r_submix.default" must be installed on the device.
+         * The device must be provisioned with HDCP keys (for protected content).
+    -->
+    <bool name="config_enableWifiDisplay">true</bool>
+
+    <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
+         autodetected from the Configuration. -->
+    <bool name="config_showNavigationBar">true</bool>
+
+    <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
+         on the headphone/microphone jack. When false use the older uevent framework. -->
+    <bool name="config_useDevInputEventForAudioJack">true</bool>
+
     <!-- Array of integer pairs controlling the rate at which the master volume changes
          in response to volume up and down key events.
          The first integer of each pair is compared against the current master volume
@@ -29,8 +96,8 @@
          and the second integer of the pair indicates the amount to increase the master volume
          when volume up is pressed. -->
     <integer-array name="config_masterVolumeRamp">
-        <item>0</item>  <item>1</item>	<!-- fix minimal volume too high on hdx -->
-        <item>30</item>  <item>5</item>  <!-- default: always increase volume by 5% -->
+        <item>0</item> <item>1</item>	<!-- fix minimal volume too high on hdx (not working) -->
+        <item>50</item> <item>5</item>  <!-- default: always increase volume by 5% -->
     </integer-array>
 
 </resources>

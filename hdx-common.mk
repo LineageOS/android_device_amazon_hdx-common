@@ -14,7 +14,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
@@ -154,10 +154,6 @@ PRODUCT_BOOT_JARS += qcmediaplayer
 #    regulatory.bin \
 #    linville.key.pub.pem
 
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 # QC Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/vendor/lib/libqc-opt.so
@@ -175,28 +171,95 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-lab126qmi.so \
     ril.subscription.types=NV,RUIM \
-    ro.use_data_netmgrd=true \
-    persist.data.netmgrd.qos.enable=true \
-    persist.rild.nitz_plmn= \
-    persist.rild.nitz_long_ons_0= \
-    persist.rild.nitz_long_ons_1= \
-    persist.rild.nitz_long_ons_2= \
-    persist.rild.nitz_long_ons_3= \
-    persist.rild.nitz_short_ons_0= \
-    persist.rild.nitz_short_ons_1= \
-    persist.rild.nitz_short_ons_2= \
-    persist.rild.nitz_short_ons_3= \
+    persist.rild.nitz_plmn="" \
+    persist.rild.nitz_long_ons_0="" \
+    persist.rild.nitz_long_ons_1="" \
+    persist.rild.nitz_long_ons_2="" \
+    persist.rild.nitz_long_ons_3="" \
+    persist.rild.nitz_short_ons_0="" \
+    persist.rild.nitz_short_ons_1="" \
+    persist.rild.nitz_short_ons_2="" \
+    persist.rild.nitz_short_ons_3="" \
     DEVICE_PROVISIONED=1 \
-    ro.telephony.default_network=9 \
-    ro.ril.usb.port.serial=ttyUSB \
-    ro.ril.usb.port.qmi=qmi_usb \
-    ro.ril.usb.port.rmnet=rmnet_usb
+    ro.telephony.default_network=9
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.hw=1 \
-    debug.egl.hw=1 \
-    persist.hwc.mdpcomp.enable=true \
-    debug.mdpcomp.logs=0
+	debug.sf.hw=1 \
+	debug.egl.hw=1 \
+	persist.hwc.mdpcomp.enable=true \
+	debug.mdpcomp.logs=0 
+
+# new props test
+PRODUCT_PROPERTY_OVERRIDES += \
+	debug.composition.type=c2d \
+	sys.hwc.gpu_perf_mode=1 \
+	dev.pm.dyn_samplingrate=1 \
+	persist.demo.hdmirotationlock=false \
+	ro.hdmi.enable=true \
+	tunnel.decode=true \
+	tunnel.audiovideo.decode=true \
+	lpa.decode=false \
+	lpa.use-stagefright=true \
+	persist.speaker.prot.enable=false \
+	qcom.hw.aac.encoder=false \
+	persist.cne.feature=0 \
+	media.stagefright.enable-player=true \
+	media.stagefright.enable-http=true \
+	media.stagefright.enable-aac=true \
+	media.stagefright.enable-qcp=true \
+	media.stagefright.enable-fma2dp=true \
+	media.stagefright.enable-scan=true \
+	mmp.enable.3g2=true \
+	mm.enable.smoothstreaming=true \
+	media.aac_51_output_enabled=true \
+	mm.enable.qcom_parser=37491 \
+	vidc.debug.level=1 \
+	ro.use_data_netmgrd=true \
+	persist.data.netmgrd.qos.enable=true \
+	ro.data.large_tcp_window_size=true \
+	persist.timed.enable=true \
+	ro.qualcomm.cabl=1 \
+	telephony.lteOnCdmaDevice=0 \
+	persist.fuse_sdcard=true \
+	ro.qc.sdk.audio.ssr=false \
+	ro.qc.sdk.audio.fluencetype=none \
+	persist.audio.fluence.voicecall=true \
+	persist.audio.fluence.voicerec=false \
+	persist.audio.fluence.speaker=true \
+	ro.qc.sdk.sensors.gestures=true \
+	ro.qc.sdk.gestures.camera=false \
+	ro.qc.sdk.camera.facialproc=false \
+	ro.qcom.ad=1 \
+	ro.qcom.ad.calib.data=/system/etc/ad_calib.cfg \
+	persist.debug.wfd.enable=1 \
+	persist.sys.wfd.virtual=0 \
+	tunnel.audio.encode = true \
+	af.resampler.quality=4 \
+	audio.offload.buffer.size.kb=32 \
+	av.offload.enable=true \
+	dmid=1932882026 \
+	dolby.ds.platform=qcom \
+	audio.offload.pcm.enable=true \
+	audio.dolby.ds2.enabled=true \
+	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
+	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
+	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
+	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
+	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
+	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
+	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
+	ro.usb.vid=1949 \
+	ro.usb.pid=000c \
+	persist.sys.usb.config=mtp,adb \
+	com.msm_enhancement=true \
+	ro.wifi.standby.dtim=3 \
+	ro.recovery.wl.maxstore=524288 \
+	ro.ril.usb.port.serial=ttyUSB \
+	ro.ril.usb.port.qmi=qmi_usb \
+	ro.ril.usb.port.rmnet=rmnet_usb \
+	telephony.sms.receive=true \
+	keyguard.ori.timeout=350
+#	ro.camera.model=Kindle Fire HDX 7" \
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -208,12 +271,4 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk
 
 # call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-
-# links !
-#	ln -s /system/etc/wifi/wpa_supplicant_ath6kl.conf /system/etc/wifi/wpa_supplicant.conf
-#	ln -s /data/misc/wifi/WCNSS_qcom_cfg.ini /system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
-#	ln -s /persist/WCNSS_qcom_wlan_nv.bin /system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
-#	ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
-#	ln -s /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
-#	ln -s /system/etc/firmware/ath6k/AR6004/hw3.0/boardData_Thor_FCC.bin /system/etc/firmware/ath6k/AR6004/hw3.0/bdata.bin
 

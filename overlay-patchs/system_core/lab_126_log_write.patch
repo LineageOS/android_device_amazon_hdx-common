@@ -3,15 +3,16 @@ project system/core/
 diff --git a/libcutils/klog.c b/libcutils/klog.c
 old mode 100644
 new mode 100755
-index d69fb10..74551b0
+index d69fb10..b8cff3d
 --- a/libcutils/klog.c
 +++ b/libcutils/klog.c
-@@ -25,6 +25,10 @@
+@@ -25,6 +25,11 @@
  
  #include <cutils/klog.h>
  
 +#ifdef AMZ_HDX
-+extern int lab126_log_write(int prio, const char *tag, const char *msg);
++extern int lab126_log_write(int bufID, int prio, const char *tag, const char *fmt, ...);
++extern int __vitals_log_print(int bufID, int prio, const char *tag, const char *fmt, ...);
 +#endif
 +
  static int klog_fd = -1;
@@ -20,17 +21,44 @@ index d69fb10..74551b0
 diff --git a/liblog/logd_write.c b/liblog/logd_write.c
 old mode 100644
 new mode 100755
-index a2b9424..e11bd6b
+index a2b9424..49d8911
 --- a/liblog/logd_write.c
 +++ b/liblog/logd_write.c
-@@ -245,6 +245,13 @@ static int __write_to_log_init(log_id_t log_id, struct iovec *vec, size_t nr)
+@@ -245,6 +245,40 @@ static int __write_to_log_init(log_id_t log_id, struct iovec *vec, size_t nr)
      return write_to_log(log_id, vec, nr);
  }
  
 +#ifdef AMZ_HDX
-+int lab126_log_write(int prio, const char *tag, const char *msg)
++int lab126_log_write(int bufID, int prio, const char *tag, const char *fmt, ...)
 +{
-+	return -1;
++	va_list ap;
++	char buf[LOG_BUF_SIZE];
++
++	// skip flooding logs
++	if (!tag)
++	{
++        	tag = "";
++	}
++	if( strncmp(tag, "Sensors", 7) == 0
++		||  strncmp(tag, "qcom_se", 7) == 0 )
++	{
++		return 0;
++	}
++	// skip flooding logs
++
++	va_start(ap, fmt);
++	vsnprintf(buf, LOG_BUF_SIZE, fmt, ap);
++	va_end(ap);
++
++	char new_tag[128];
++	snprintf(new_tag, sizeof(new_tag), "CM11-%s", tag);
++
++	return __android_log_buf_write(LOG_ID_MAIN, ANDROID_LOG_DEBUG, new_tag, buf);
++}
++
++int __vitals_log_print(int bufID, int prio, const char *tag, const char *fmt, ...)
++{
++	return __android_log_write(ANDROID_LOG_DEBUG, tag, "__vitals_log_print not implemented");
 +}
 +#endif
 +

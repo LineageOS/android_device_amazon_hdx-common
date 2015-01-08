@@ -95,10 +95,11 @@
          The last pair with first integer <= the current volume is chosen,
          and the second integer of the pair indicates the amount to increase the master volume
          when volume up is pressed. -->
+    <!-- 
     <integer-array name="config_masterVolumeRamp">
-        <item>0</item> <item>1</item>	<!-- fix minimal volume too high on hdx (not working) -->
-        <item>50</item> <item>5</item>  <!-- default: always increase volume by 5% -->
+        <item>0</item> <item>1</item>	
+        <item>50</item> <item>5</item>
     </integer-array>
-
+    -->
 </resources>
 

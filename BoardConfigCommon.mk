@@ -41,15 +41,15 @@ TARGET_QCOM_DISPLAY_VARIANT := caf-hdx
 TARGET_QCOM_MEDIA_VARIANT := caf-hdx
 
 # Audio
-AUDIO_FEATURE_DISABLED_SSR := true #MSM ANDROID
+AUDIO_FEATURE_DISABLED_SSR := true #MSM CAF
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_LEGACY_ALSA_AUDIO := false
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
-BLUETOOTH_HCI_USE_MCT := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amazon/hdx-common/bluetooth
+#BLUETOOTH_HCI_USE_MCT := true
+#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amazon/hdx-common/bluetooth
 
 # chargers
 BOARD_CHARGER_RES := device/amazon/hdx-common/charger
@@ -58,8 +58,16 @@ BOARD_CHARGER_RES := device/amazon/hdx-common/charger
 BOARD_EGL_CFG := device/amazon/hdx-common/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_OVERLAY := false
-TARGET_USES_ION := false
+TARGET_USES_OVERLAY := true
+TARGET_USES_ION := false # wrong caf tag ?!
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+MAX_EGL_CACHE_KEY_SIZE := 12*1024
+MAX_EGL_CACHE_SIZE := 2048*1024
+
+# Power
+#TARGET_POWERHAL_VARIANT := qcom
+# Time services
+#BOARD_USES_QC_TIME_SERVICES := true
 
 # Webkit
 ENABLE_WEBGL := true

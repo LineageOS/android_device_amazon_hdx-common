@@ -14,7 +14,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
@@ -241,13 +241,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dolby.ds.platform=qcom \
 	audio.offload.pcm.enable=true \
 	audio.dolby.ds2.enabled=true \
-	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
-	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
-	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
-	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
-	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
-	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
-	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
 	ro.usb.vid=1949 \
 	ro.usb.pid=000c \
 	persist.sys.usb.config=mtp,adb \
@@ -260,6 +253,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	telephony.sms.receive=true \
 	keyguard.ori.timeout=350
 #	ro.camera.model=Kindle Fire HDX 7" \
+
+#	DISABLE calfiles as audio volume is too loud
+#	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
+#	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
+#	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
+#	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
+#	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
+#	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
+#	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

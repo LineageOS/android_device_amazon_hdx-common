@@ -37,7 +37,7 @@ index a2b9424..49d8911
 +	// skip flooding logs
 +	if (!tag)
 +	{
-+        	tag = "";
++		tag = "";
 +	}
 +	if( strncmp(tag, "Sensors", 7) == 0
 +		||  strncmp(tag, "qcom_se", 7) == 0 )

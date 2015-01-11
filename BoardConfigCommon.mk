@@ -23,7 +23,6 @@ TARGET_CPU_VARIANT := krait
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
 # Flags for Krait CPU
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
@@ -133,3 +132,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27x41
 
+# hdx old bootloader dtb compatibility fix + bootloader signature exploit patch
+# override bootimg to manually append propietary dtb extracted from 4.5.2 kernel
+BOARD_CUSTOM_BOOTIMG_MK := device/amazon/hdx-common/mkboot.mk

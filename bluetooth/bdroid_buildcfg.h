@@ -17,14 +17,11 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BLUETOOTH_QCOM_SW TRUE
-
 #define BTM_DEF_LOCAL_NAME   "KFire HDX"
-// Disables read remote device feature
-//#define BTA_SKIP_BLE_READ_REMOTE_FEAT TRUE
-//#define MAX_L2CAP_CHANNELS    14
-// skips conn update at conn completion
-//#define BTA_BLE_SKIP_CONN_UPD  TRUE
-// Enables interleaved scan
-//#define BTA_HOST_INTERLEAVE_SEARCH TRUE
+#define BTA_DISABLE_DELAY 1000 /* in milliseconds */
+#define BLUETOOTH_QCOM_SW TRUE
+#define BLUETOOTH_QCOM_LE_INTL_SCAN TRUE
+#define BTC_INCLUDED TRUE
+
 #endif
+

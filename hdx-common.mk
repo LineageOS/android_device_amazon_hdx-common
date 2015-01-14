@@ -144,6 +144,10 @@ PRODUCT_PACKAGES += \
     hostapd.accept \
     hostapd.deny
 
+# BT
+PRODUCT_PACKAGES += \
+	libbt-vendor
+
 PRODUCT_BOOT_JARS += qcmediaplayer
 
 # Wifi

@@ -139,6 +139,7 @@ PRODUCT_PACKAGES += \
     hostapd_default.conf \
     hostapd.accept \
     hostapd.deny
+#   wcnss_service <- not working
 
 # BT
 PRODUCT_PACKAGES += \

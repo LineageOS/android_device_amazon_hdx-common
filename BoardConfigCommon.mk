@@ -63,8 +63,8 @@ TARGET_USES_QCOM_MM_AUDIO := true
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 WIFI_BT_STATUS_SYNC := true
-#BLUETOOTH_HCI_USE_MCT := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amazon/hdx-common/bluetooth
+#BLUETOOTH_HCI_USE_MCT := true
 
 # chargers
 BOARD_CHARGER_RES := device/amazon/hdx-common/charger
@@ -87,7 +87,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 #TARGET_POWERHAL_VARIANT := qcom
 
 # Time services
-#BOARD_USES_QC_TIME_SERVICES := true <- BUG
+BOARD_USES_QC_TIME_SERVICES := true
 
 # Webkit
 ENABLE_WEBGL := true
@@ -118,9 +118,12 @@ WIFI_DRIVER_FW_PATH_P2P			:= "p2p"
 WIFI_DRIVER_FW_PATH_PARAM		:= "/sys/module/wlan/parameters/fwpath"
 WIFI_DRIVER_MODULE_PATH 		:= "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME 		:= "wlan"
-TARGET_USES_WCNSS_CTRL			:= true
-TARGET_USES_QCOM_WCNSS_QMI		:= true
-#WIFI_BAND 				:= 802_11_ABG
+# not working "wcnss_service"
+#TARGET_USES_WCNSS_CTRL			:= true
+#TARGET_USES_QCOM_WCNSS_QMI		:= true
+#TARGET_PROVIDES_WCNSS_QMI		:= true
+#TARGET_USES_WCNSS_MAC_ADDR_REV		:= true
+# not working "wcnss_service"
 
 # NFC
 BOARD_HAVE_NFC := false
@@ -144,6 +147,8 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # TWRP Recovery
+RECOVERY_FSTAB_VERSION := 2
+TARGET_RECOVERY_QCOM_RTC_FIX := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 RECOVERY_SDCARD_ON_DATA := true
@@ -152,7 +157,7 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TARGET_USERIMAGES_USE_EXT4 := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27x41
-TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/twrp.fstab
+TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/rootdir/etc/fstab.qcom
 
 # hdx old bootloader dtb compatibility fix + bootloader signature exploit patch
 # override bootimg to manually append propietary dtb extracted from 4.5.2 kernel

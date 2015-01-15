@@ -2,7 +2,7 @@
 
 	<!--twrp recovery -->
 	<remove-project name="CyanogenMod/android_bootable_recovery" />
-	<project path="bootable/recovery" name="omnirom/android_bootable_recovery" remote="github" revision="android-4.4" />
+	<project path="bootable/recovery" name="omnirom/android_bootable_recovery" remote="github" revision="android-5.0" />
 
 	<!-- android msm caf sources (LNX.LA.3.5.1.5-01700-8x74.0) -->
 	<project path="hardware/qcom/audio-caf-hdx" name="Cpasjuste/hardware_qcom_audio-caf-hdx" remote="github" revision="cm-11.0" />

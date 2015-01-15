@@ -54,10 +54,6 @@ PRODUCT_PACKAGES += \
 	ueventd.qcom.rc \
 	init.recovery.qcom.rc
 
-# Recovery
-PRODUCT_COPY_FILES += \
-	$(COMMON_FOLDER)/twrp.fstab:recovery/root/etc/twrp.fstab
-
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \

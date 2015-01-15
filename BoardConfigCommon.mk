@@ -128,7 +128,7 @@ BOARD_HAVE_NFC := false
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 32
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/msm_dwc3/f9200000.dwc3/gadget/lun%d/file
 
 # custom liblights (because we basically have none)
 TARGET_PROVIDES_LIBLIGHT := true
@@ -142,16 +142,17 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/rootdir/etc/fstab.qcom
 
 # TWRP Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TARGET_USERIMAGES_USE_EXT4 := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27x41
+TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/twrp.fstab
 
 # hdx old bootloader dtb compatibility fix + bootloader signature exploit patch
 # override bootimg to manually append propietary dtb extracted from 4.5.2 kernel

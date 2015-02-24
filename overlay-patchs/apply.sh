@@ -13,6 +13,6 @@ for i in $(find "$PATCHBASE"/* -type d); do
 	done
 	echo applying $PATCHNAME to $PATCHTARGET
 	cd "$CMBASE/$PATCHTARGET" || exit 1
-	git apply --3way "$PATCHBASE/$PATCHNAME"/*.patch 
+	git apply "$PATCHBASE/$PATCHNAME"/*.patch 
 #|| exit 1
 done

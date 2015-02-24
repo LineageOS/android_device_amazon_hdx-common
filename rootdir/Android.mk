@@ -29,7 +29,12 @@ include $(CLEAR_VARS)
 LOCAL_MODULE       := init.target.rc
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/init.target.rc
+ifeq ($(TARGET_DEVICE),apollo)
+LOCAL_SRC_FILES    := etc/init.target.rc.apollo
+endif
+ifeq ($(TARGET_DEVICE),thor)
+LOCAL_SRC_FILES    := etc/init.target.rc.thor
+endif
 LOCAL_MODULE_PATH  := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 

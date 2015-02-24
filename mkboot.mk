@@ -30,7 +30,10 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES)
 	$(append-dtb)
 	cp $(KERNEL_OUT)/arch/arm/boot/$(DTS_NAMES)-v2-zImage $(PRODUCT_OUT)/kernel
 	$(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
-	./device/amazon/hdx-common/Cuber/Cuber -sign $@ $@.signed
+	cd ./device/amazon/hdx-common/Cuber/ && \
+	make && \
+	./Cuber --sign $@ $@.signed && \
+	cd -
 	$(hide) mv $@.signed $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
 	@echo -e ${CL_CYN}"Made hdx hacked boot image: $@"${CL_RST}
@@ -41,7 +44,10 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_k
 	$(append-dtb)
 	cp $(KERNEL_OUT)/arch/arm/boot/$(DTS_NAMES)-v2-zImage $(PRODUCT_OUT)/kernel
 	$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
-	./device/amazon/hdx-common/Cuber/Cuber -sign $@ $@.signed
+	cd ./device/amazon/hdx-common/Cuber/ && \
+	make && \
+	./Cuber --sign $@ $@.signed && \
+	cd -
 	$(hide) mv $@.signed $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE),raw)
 	@echo -e ${CL_CYN}"Made hdx hacked recovery image: $@"${CL_RST}

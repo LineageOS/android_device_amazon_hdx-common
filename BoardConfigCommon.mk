@@ -21,8 +21,8 @@ TARGET_CPU_VARIANT := krait
 
 # Kernel -> use prebuilt kernel ...
 ifeq ($(TARGET_DEVICE),thor)
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 mdss_mdp.panel=0:qcom,mdss_dsi_novatek_1080p_video androidboot.selinux=permissive
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 endif
 ifeq ($(TARGET_DEVICE),apollo)
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 mdss_mdp.panel=0:qcom,mdss_dsi_jdi_dualmipi0_video:1:qcom,mdss_dsi_jdi_dualmipi1_video: androidboot.selinux=permissive
@@ -148,6 +148,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 USE_CAMERA_STUB := true
 
 # CWM Recovery
+TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -165,8 +166,6 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TARGET_USERIMAGES_USE_EXT4 := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27x41
-TARGET_RECOVERY_FSTAB := device/amazon/hdx-common/rootdir/etc/fstab.qcom
 
 # hdx old bootloader dtb compatibility fix + bootloader signature exploit patch
-# override bootimg to manually append propietary dtb extracted from 4.5.2 kernel
 BOARD_CUSTOM_BOOTIMG_MK := device/amazon/hdx-common/mkboot.mk

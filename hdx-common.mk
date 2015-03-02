@@ -54,6 +54,11 @@ PRODUCT_PACKAGES += \
 	ueventd.qcom.rc \
 	init.recovery.qcom.rc
 
+# fix libqc-opt.so (missing "utext_openUChars_51" import from stagefright 4.X)
+# https://github.com/TheMuppets/proprietary_vendor_samsung/blob/cm-12.0/d2-common/proprietary/lib/libqc-opt.so
+PRODUCT_COPY_FILES += \
+	$(COMMON_FOLDER)/overlay-binaries/libqc-opt.so:system/vendor/lib/libqc-opt.so	
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \

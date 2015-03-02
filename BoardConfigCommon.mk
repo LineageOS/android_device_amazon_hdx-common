@@ -12,12 +12,23 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 TARGET_NO_BOOTLOADER := true
 
 # Architecture
+TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
+ARCH_ARM_HAVE_TLS_REGISTER := true
+
+# Krait optimizations
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
+TARGET_USE_KRAIT_PLD_SET := true
+TARGET_KRAIT_BIONIC_PLDOFFS := 10
+TARGET_KRAIT_BIONIC_PLDTHRESH := 10
+TARGET_KRAIT_BIONIC_BBTHRESH := 64
+TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
 # Kernel -> use prebuilt kernel ...
 ifeq ($(TARGET_DEVICE),thor)
@@ -28,25 +39,21 @@ ifeq ($(TARGET_DEVICE),apollo)
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 mdss_mdp.panel=0:qcom,mdss_dsi_jdi_dualmipi0_video:1:qcom,mdss_dsi_jdi_dualmipi1_video: androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 endif
-
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
-
-# Flags for Krait CPU
-TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 # Flags
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP -DUSE_ION -DAMZ_HDX
+COMMON_GLOBAL_CFLAGS += -DAMZ_HDX
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+#-DQCOM_HARDWARE -DQCOM_BSP -DUSE_ION 
 
 # QCOM hardware
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-TARGET_QCOM_DISPLAY_VARIANT := caf-hdx
-TARGET_QCOM_MEDIA_VARIANT := caf-hdx
-TARGET_QCOM_AUDIO_VARIANT := caf-hdx
+#BOARD_USES_QCOM_HARDWARE := true
+#TARGET_USES_QCOM_BSP := true
+#TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+#TARGET_QCOM_DISPLAY_VARIANT := caf-hdx
+#TARGET_QCOM_MEDIA_VARIANT := caf-hdx
+#TARGET_QCOM_AUDIO_VARIANT := caf-hdx
 
 # Audio
 AUDIO_FEATURE_DISABLED_SSR := true #MSM CAF
@@ -87,15 +94,16 @@ TARGET_DISPLAY_USE_RETIRE_FENCE := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-#NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3 <- NO
-#TARGET_HAS_OLD_QCOM_ION := true <- NO
-#TARGET_USES_POST_PROCESSING := true <- NO
+
+# Surfaceflinger optimization for VD surfaces
+TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Power
 #TARGET_POWERHAL_VARIANT := qcom
 
 # Time services
-BOARD_USES_QC_TIME_SERVICES := true
+#BOARD_USES_QC_TIME_SERVICES := true
 
 # Webkit
 ENABLE_WEBGL := true
@@ -169,3 +177,11 @@ TW_CUSTOM_BATTERY_PATH := /sys/class/power_supply/bq27x41
 
 # hdx old bootloader dtb compatibility fix + bootloader signature exploit patch
 BOARD_CUSTOM_BOOTIMG_MK := device/amazon/hdx-common/mkboot.mk
+
+# SELinux policies
+# qcom sepolicy
+include device/qcom/sepolicy/sepolicy.mk
+
+BOARD_SEPOLICY_DIRS += \
+        device/amazon/hdx-common/sepolicy
+

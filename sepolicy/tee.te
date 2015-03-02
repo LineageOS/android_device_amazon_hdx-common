@@ -1,0 +1,4 @@
+allow tee shell_data_file:dir { write add_name };
+allow tee shell_data_file:fifo_file { create setattr };
+allow tee vfat:file { read getattr open };
+

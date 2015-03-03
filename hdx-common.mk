@@ -139,6 +139,7 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 PRODUCT_PACKAGES += \
+	wpa_supplicant \
     wpa_supplicant_overlay.conf \
     p2p_supplicant_overlay.conf \
     hostapd_default.conf \

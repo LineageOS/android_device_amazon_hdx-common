@@ -1,3 +1,10 @@
+# Qualcomm Secure Execution Environment Communicator policy
+allow tee self:process execmem;
+
+allow tee persist_file:dir search;
+allow tee persist_drm_file:dir r_dir_perms;
+allow tee persist_drm_file:file r_file_perms;
+
 allow tee shell_data_file:dir { write add_name };
 allow tee shell_data_file:fifo_file { create setattr };
 allow tee vfat:file { read getattr open };

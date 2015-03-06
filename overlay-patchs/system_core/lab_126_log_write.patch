@@ -3,7 +3,7 @@ project system/core/
 diff --git a/libcutils/klog.c b/libcutils/klog.c
 old mode 100644
 new mode 100755
-index d69fb10..b8cff3d
+index fbb7b72..64f619d
 --- a/libcutils/klog.c
 +++ b/libcutils/klog.c
 @@ -25,6 +25,11 @@
@@ -21,10 +21,10 @@ index d69fb10..b8cff3d
 diff --git a/liblog/logd_write.c b/liblog/logd_write.c
 old mode 100644
 new mode 100755
-index a2b9424..49d8911
+index 520106e..7a9858c
 --- a/liblog/logd_write.c
 +++ b/liblog/logd_write.c
-@@ -245,6 +245,40 @@ static int __write_to_log_init(log_id_t log_id, struct iovec *vec, size_t nr)
+@@ -421,6 +421,50 @@ static int __write_to_log_init(log_id_t log_id, struct iovec *vec, size_t nr)
      return write_to_log(log_id, vec, nr);
  }
  
@@ -33,6 +33,8 @@ index a2b9424..49d8911
 +{
 +	va_list ap;
 +	char buf[LOG_BUF_SIZE];
++	int _a = bufID;
++	int _b = prio;
 +
 +	// skip flooding logs
 +	if (!tag)
@@ -58,6 +60,14 @@ index a2b9424..49d8911
 +
 +int __vitals_log_print(int bufID, int prio, const char *tag, const char *fmt, ...)
 +{
++	va_list ap;
++	char buf[LOG_BUF_SIZE];
++	int _a = bufID;
++	int _b = prio;
++
++	va_start(ap, fmt);
++	va_end(ap);
++
 +	return __android_log_write(ANDROID_LOG_DEBUG, tag, "__vitals_log_print not implemented");
 +}
 +#endif

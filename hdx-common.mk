@@ -242,18 +242,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # audio/media props
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
-	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
-	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
-	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
-	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
-	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
-	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
 	media.aac_51_output_enabled=true \
 	vidc.debug.level=1 \
 	persist.audio.fluence.voicecall=true \
 	audio.offload.buffer.size.kb=32 \
 	av.offload.enable=true
+
+#	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
+#	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
+#	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
+#	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
+#	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
+#	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
+#	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
 
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

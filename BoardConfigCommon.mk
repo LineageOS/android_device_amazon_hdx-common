@@ -151,8 +151,9 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 32
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/msm_dwc3/f9200000.dwc3/gadget/lun%d/file
 
-# custom liblights (because we basically have none)
-TARGET_PROVIDES_LIBLIGHT := true
+# The backlight is controlled through the lights interface
+# so this needs to stay commented out
+#TARGET_PROVIDES_LIBLIGHT := true
 
 # Temporary
 USE_CAMERA_STUB := true

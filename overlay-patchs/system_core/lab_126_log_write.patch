@@ -3,10 +3,10 @@ project system/core/
 diff --git a/libcutils/klog.c b/libcutils/klog.c
 old mode 100644
 new mode 100755
-index fbb7b72..6e7e4da
+index fbb7b72..199cc3d
 --- a/libcutils/klog.c
 +++ b/libcutils/klog.c
-@@ -25,6 +25,38 @@
+@@ -25,6 +25,39 @@
  
  #include <cutils/klog.h>
  
@@ -14,6 +14,7 @@ index fbb7b72..6e7e4da
 +extern int lab126_log_write(int bufID, int prio, const char *tag, const char *fmt, ...);
 +extern int __vitals_log_print(int bufID, int prio, const char *tag, const char *fmt, ...);
 +
++// fix missing functions from audio.primary.msm8974.so blob
 +struct listnode
 +{
 +    struct listnode *next;
@@ -48,7 +49,7 @@ index fbb7b72..6e7e4da
 diff --git a/liblog/logd_write.c b/liblog/logd_write.c
 old mode 100644
 new mode 100755
-index 520106e..7a9858c
+index 520106e..2da7b92
 --- a/liblog/logd_write.c
 +++ b/liblog/logd_write.c
 @@ -421,6 +421,50 @@ static int __write_to_log_init(log_id_t log_id, struct iovec *vec, size_t nr)
@@ -80,7 +81,7 @@ index 520106e..7a9858c
 +	va_end(ap);
 +
 +	char new_tag[128];
-+	snprintf(new_tag, sizeof(new_tag), "CM11-%s", tag);
++	snprintf(new_tag, sizeof(new_tag), "AMZ-%s", tag);
 +
 +	return __android_log_buf_write(LOG_ID_MAIN, ANDROID_LOG_DEBUG, new_tag, buf);
 +}

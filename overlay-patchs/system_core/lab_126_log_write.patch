@@ -3,17 +3,44 @@ project system/core/
 diff --git a/libcutils/klog.c b/libcutils/klog.c
 old mode 100644
 new mode 100755
-index fbb7b72..64f619d
+index fbb7b72..6e7e4da
 --- a/libcutils/klog.c
 +++ b/libcutils/klog.c
-@@ -25,6 +25,11 @@
+@@ -25,6 +25,38 @@
  
  #include <cutils/klog.h>
  
 +#ifdef AMZ_HDX
 +extern int lab126_log_write(int bufID, int prio, const char *tag, const char *fmt, ...);
 +extern int __vitals_log_print(int bufID, int prio, const char *tag, const char *fmt, ...);
-+#endif
++
++struct listnode
++{
++    struct listnode *next;
++    struct listnode *prev;
++};
++
++void list_init(struct listnode *node)
++{
++    node->next = node;
++    node->prev = node;
++}
++
++void list_add_tail(struct listnode *head, struct listnode *item)
++{
++    item->next = head;
++    item->prev = head->prev;
++    head->prev->next = item;
++    head->prev = item;
++}
++
++void list_remove(struct listnode *item)
++{
++    item->next->prev = item->prev;
++    item->prev->next = item->next;
++}
++
++#endif // AMZ_HDX
 +
  static int klog_fd = -1;
  static int klog_level = KLOG_DEFAULT_LEVEL;

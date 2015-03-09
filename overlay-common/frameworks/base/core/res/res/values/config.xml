@@ -75,7 +75,7 @@
     <bool name="config_useDevInputEventForAudioJack">true</bool>
 
     <!-- This device does not allow sms service. -->
-    <bool name="config_sms_capable">false</bool>
+    <bool name="config_sms_capable">true</bool>
 
     <!-- Flag indicating whether the current device is "voice capable".
          If true, this means that the device supports circuit-switched
@@ -87,20 +87,14 @@
          PackageManager.FEATURE_TELEPHONY system feature, which is
          available on *any* device with a telephony radio, even if the
          device is data-only. -->
-    <bool name="config_voice_capable">false</bool>
+    <bool name="config_voice_capable">true</bool>
 
-    <!-- Array of integer pairs controlling the rate at which the master volume changes
-         in response to volume up and down key events.
-         The first integer of each pair is compared against the current master volume
-         (in range 0 to 100).
-         The last pair with first integer <= the current volume is chosen,
-         and the second integer of the pair indicates the amount to increase the master volume
-         when volume up is pressed. -->
-    <!-- 
-    <integer-array name="config_masterVolumeRamp">
-        <item>0</item> <item>1</item>	
-        <item>50</item> <item>5</item>
-    </integer-array>
-    -->
+    <!-- List of regexpressions describing the interface (if any) that represent tetherable
+         Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
+         should be empty.  An example would be "softap.*" -->
+    <string-array translatable="false" name="config_tether_wifi_regexs">
+        <item>"wlan0"</item>
+    </string-array>
+
 </resources>
 

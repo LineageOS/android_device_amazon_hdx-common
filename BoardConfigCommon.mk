@@ -81,9 +81,9 @@ AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
+QCOM_BT_USE_SMD_TTY := true
 WIFI_BT_STATUS_SYNC := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amazon/hdx-common/bluetooth
-#BLUETOOTH_HCI_USE_MCT := true
 
 # chargers
 BOARD_CHARGER_RES := device/amazon/hdx-common/charger

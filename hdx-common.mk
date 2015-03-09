@@ -255,6 +255,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
+# CM updater
+PRODUCT_PROPERTY_OVERRIDES += \
+	cm.updater.uri="http://kfirehdx.ddns.net/CyanogenModOTA/api"
+
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 

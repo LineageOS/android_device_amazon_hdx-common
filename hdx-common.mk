@@ -159,7 +159,7 @@ PRODUCT_PACKAGES += \
 #	wcnss_service \
 #	libwcnss_qmi
 
-# Crypto
+# QCOM Crypto
 PRODUCT_PACKAGES += \
 	libcryptfs_hw
 

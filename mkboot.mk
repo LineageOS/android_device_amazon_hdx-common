@@ -14,8 +14,8 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES)
 	cat $(KERNEL_OUT)/arch/arm/boot/zImage $(KERNEL_OUT)/arch/arm/boot/$(DTS_NAME).dtb > $(PRODUCT_OUT)/kernel
 	$(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
 	cd ./device/amazon/hdx-common/Cuber/ && \
-	make && \
-	./Cuber --sign $@ $@.signed && \
+	make Cuber-boot && \
+	./Cuber-boot --sign $@ $@.signed && \
 	cd -
 	$(hide) mv $@.signed $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
@@ -29,8 +29,8 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(recovery_ramdisk) $(recovery_k
 	cat $(KERNEL_OUT)/arch/arm/boot/zImage $(KERNEL_OUT)/arch/arm/boot/$(DTS_NAME).dtb > $(PRODUCT_OUT)/kernel
 	$(hide) $(MKBOOTIMG) $(INTERNAL_RECOVERYIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
 	cd ./device/amazon/hdx-common/Cuber/ && \
-	make && \
-	./Cuber --sign $@ $@.signed && \
+	make Cuber-recovery && \
+	./Cuber-recovery --sign $@ $@.signed && \
 	cd -
 	$(hide) mv $@.signed $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE),raw)

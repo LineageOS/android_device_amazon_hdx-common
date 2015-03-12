@@ -452,13 +452,14 @@
         <ctl name="IIR1 INP1 MUX" value="DEC7" />
     </path>
 
+    <!--
     <path name="speaker">
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="CLASS_H_DSM MUX" value="DSM_HPHL_RX1" />
         <ctl name="DAC1 Switch" value="1" />
     </path>
-
+    -->
     <path name="speaker-fluid">
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="RX7 MIX1 INP1" value="RX1" />
@@ -475,7 +476,7 @@
         <ctl name="LINEOUT2 Volume" value="20" />
     </path>
 
-    <path name="speaker-liquid">
+    <path name="speaker">
         <path name="speaker-DB" />
         <ctl name="RDAC5 MUX" value="DEM3_INV" />
         <ctl name="RDAC7 MUX" value="DEM5_INV" />

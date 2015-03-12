@@ -59,6 +59,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/overlay-binaries/libqc-opt.so:system/vendor/lib/libqc-opt.so
 
+# fix libwvdrmengine.so (netflix, google video..) by using LG G3 D855 lollipop blob
+PRODUCT_COPY_FILES += \
+	$(COMMON_FOLDER)/overlay-binaries/libwvdrmengine.so:system/vendor/lib/libwvdrmengine.so
+
 # Audio/Media
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/vendor/audio_effects.conf:system/vendor/etc/audio_effects.conf \
@@ -121,6 +125,7 @@ PRODUCT_PACKAGES += \
 	libc2dcolorconvert \
 	libdivxdrmdecrypt \
 	libdashplayer \
+	libstagefrighthw \
 	libOmxAacEnc \
 	libOmxAmrEnc \
 	libOmxCore \
@@ -129,7 +134,6 @@ PRODUCT_PACKAGES += \
 	libOmxVdec \
 	libOmxVdecHevc \
 	libOmxVenc \
-	libstagefrighthw \
 	qcmediaplayer
 
 # Power
@@ -164,8 +168,8 @@ PRODUCT_PACKAGES += \
 	libcryptfs_hw
 
 # BT
-PRODUCT_PACKAGES += \
-	libbt-vendor
+#PRODUCT_PACKAGES += \
+#	libbt-vendor
 
 PRODUCT_BOOT_JARS += \
 	qcmediaplayer

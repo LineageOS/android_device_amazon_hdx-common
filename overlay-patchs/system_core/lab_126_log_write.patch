@@ -1,5 +1,29 @@
 
 project system/core/
+diff --git a/init/property_service.c b/init/property_service.c
+index 5fefd26..1f6562d 100644
+--- a/init/property_service.c
++++ b/init/property_service.c
+@@ -101,6 +101,19 @@ struct {
+     { "wc_transport.",     AID_BLUETOOTH,   AID_SYSTEM },
+     { "build.fingerprint", AID_SYSTEM,   0 },
+     { "partition."        , AID_SYSTEM,   0},
++// HDX RIL HACK START //
++    { "persist.ril.stat.reboot",	AID_RADIO,    0 },
++    { "persist.ril.stat.usb.reset",	AID_RADIO,    0 },
++    { "persist.ril.stat.reboot",	AID_RADIO,    0 },
++    { "persist.ril.stat.lastboot",	AID_RADIO,    0 },
++    { "persist.ril.stat.usb.reset",	AID_RADIO,    0 },
++    { "persist.ril.tool.lastgw",	AID_RADIO,    0 },
++    { "persist.ril.tool.lastip",	AID_RADIO,    0 },
++    { "persist.ril.tool.lastgw",	AID_RADIO,    0 },
++    { "persist.ril.tool.lastip",	AID_RADIO,    0 },
++    { "persist.ril.tool.lastgw",	AID_RADIO,    0 },
++    { "persist.ril.tool.lastip",	AID_RADIO,    0 },
++// HDX RIL HACK END //
+     { NULL, 0, 0 }
+ };
+ 
 diff --git a/libcutils/klog.c b/libcutils/klog.c
 old mode 100644
 new mode 100755

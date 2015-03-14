@@ -61,7 +61,7 @@ PRODUCT_COPY_FILES += \
 
 # fix libwvdrmengine.so (netflix, google video..) by using LG G3 D855 lollipop blob
 PRODUCT_COPY_FILES += \
-	$(COMMON_FOLDER)/overlay-binaries/libwvdrmengine.so:system/vendor/lib/libwvdrmengine.so
+	$(COMMON_FOLDER)/overlay-binaries/libwvdrmengine.so:system/vendor/lib/mediadrm/libwvdrmengine.so
 
 # Audio/Media
 PRODUCT_COPY_FILES += \

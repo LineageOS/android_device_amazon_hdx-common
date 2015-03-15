@@ -33,6 +33,14 @@ else
     platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
 
+# Disable radio on non-lte devices
+if [ ! -f /proc/product_features/wan ]; then
+   setprop keyguard.no_require_sim 1
+   setprop ro.radio.use-ppp no
+   setprop ro.config.nocheckin yes
+   setprop ro.radio.noril yes
+fi
+
 start_battery_monitor()
 {
 	if ls /sys/bus/spmi/devices/qpnp-bms-*/fcc_data ; then

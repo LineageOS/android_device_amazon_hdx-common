@@ -1,8 +1,9 @@
+#!/usr/bin/env python
 import gmpy2
 from gmpy2 import mpz
 import struct
 from binascii import unhexlify
-
+import sys
 
 BITLEN = 2048
 
@@ -83,7 +84,7 @@ def createsig():
     prefix = 0x0001FFFFFFFFFFFFFFFF000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
     #load the hash from created file
-    f = open("hash.abc", "rb")
+    f = open("hash-"+sys.argv[1]+".abc", "rb")
     block = f.read(32)
     hash = struct.unpack('>4Q', block)
     hash0 = int(hash[0])<<192
@@ -99,7 +100,7 @@ def createsig():
 
     # write signature to file
     pref = int(prefix)
-    file = open("signature.abc","wb")
+    file = open("signature-"+sys.argv[1]+".abc","wb")
     file.write(long_to_bytes(pref, "big"))
 
 createsig()

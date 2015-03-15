@@ -1,3 +1,5 @@
+#include <sys/types.h>
+#include <unistd.h>
 #include <iostream>
 #include <sstream>
 #include <cstring>
@@ -401,28 +403,36 @@ This function creates the signature
 Returns -1 if somethings fails otherwise 0
 */
 int create_signature(unsigned char* hash, unsigned char* outputbuffer){
+
+        char cmd[1024];
+        char hashabc[1024];
+        char sigabc[1024];
 	
 	/*
 	Create file and write the hash into it binary
 	*/
 	FILE *hashfile;
-	hashfile= fopen("hash.abc", "wb");
+	snprintf (hashabc, 1024, "hash-%ld.abc", (long)getpid());
+
+	hashfile= fopen(hashabc, "wb");
 	fwrite(hash, 32, 1, hashfile);
 	fclose(hashfile);
 	/*
 	Invoke the python script
 	*/
-	system("python signature.py");
+	snprintf (cmd, 1024, "python signature.py %ld", (long)getpid());
+	system(cmd);
 	/*
 	Remove file with hash
 	*/
-	remove("hash.abc");
+	remove(hashabc);
 
 	/*
 	Open file with bnary signature
 	*/
 	FILE *sigfile;
-	sigfile = fopen("signature.abc", "rb");
+	snprintf (sigabc, 1024, "signature-%ld.abc", (long)getpid());
+	sigfile = fopen(sigabc, "rb");
 
 	/*
 	If there's no file, the python script failed
@@ -440,7 +450,7 @@ int create_signature(unsigned char* hash, unsigned char* outputbuffer){
 	if (filesize == 0){
 		std::cerr << "[ ERROR ] No signature created..." << std::endl;
 		std::cerr << "	  Ensure python and gmpy2 are installed as well as that signature.py is in the same directory" << std::endl;
-		remove("signature.abc");
+		remove(sigabc);
 		return -1;
 	}
 
@@ -468,6 +478,6 @@ int create_signature(unsigned char* hash, unsigned char* outputbuffer){
 	cleanup
 	*/
 	fclose(sigfile);
-	remove("signature.abc");
+	remove(sigabc);
 	return 0;
 }

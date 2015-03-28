@@ -1,0 +1,136 @@
+#!/bin/bash -e
+
+shopt -s nullglob
+
+x=${0##*/}
+f="update-kindle-1[34].*_user_*.bin"
+t=/tmp
+
+
+
+bye() {
+    trap - 0
+    ! [ -d "$w" ] || rm -fr "$w"
+    (($#)) || set -- -1 $x: exiting prematurely.
+    local e=$1
+    shift
+    echo "$@"
+    exit $e
+}
+
+trap bye 0
+
+req() {
+    type -P "$1" > /dev/null || bye 2 "$x: missing command '$1' (PKG:${2:-$1})"
+}
+
+use() {
+    bye 1 "Usage: $x [ARGS]
+
+    where ARGS can be any combination of the following:
+    - an OTA update file (e.g. $f)
+    - a boot image file (e.g. boot.img)
+    - a working directory with enough space to unpack/repack (e.g. /var/tmp)
+    - literal 'fw' :: include firmware updates (except 'aboot') [DANGEROUS!]"
+}
+
+
+for i
+do
+    if [ -d "$i" ]
+    then
+        t=$i
+        continue
+    elif [ -r "$i" ]
+    then
+        read -N8 < $i
+        if [ "PK" = "${REPLY::2}" ]
+        then
+            u=$i
+            continue
+        elif [ "ANDROID!" = "$m" ]
+        then
+            B=$i
+        fi
+    elif [ "fw" = "$i" ]
+    then
+        fw=1
+        continue
+    fi
+    use
+done
+
+[ "$u" ] || select u in $f
+do
+    ! [ "$u" ] || break
+done
+
+[ "$u" ] || use
+
+
+req df coreutils
+req unzip
+req tail coreutils
+req stat coreutils
+req realpath
+req mktemp coreutils
+req python
+req sed
+req zip
+
+
+# check for disk space
+s=($(unzip -l "$u" | tail -1))
+((s+=$(stat -c%s $u)))
+a=$(df -B1 --output=avail $t | tail -1)
+((s < a)) || bye 3 "$x: Only $a bytes available in '$t'.
+$x: Need $s bytes to unpack and repack '$u'.
+$x: Please specify another working directory on the command line!"
+
+# make sure we won't get lost
+p=$(realpath ${0/%$x/cuboot.py})
+u=$(realpath "$u")
+t=$(realpath "$t")
+
+! [ "$B" ] || B=$(realpath "$B")
+ 
+
+# get to work
+w=$(mktemp -d "$t/$x-XXXXXX")
+cd "$w"
+echo "extracting archive '$u'"
+unzip -q "$u"
+
+
+# fix boot image
+if [ "$B" ]
+then
+    cp -v "$B" boot.img
+else
+    python "$p" boot.img
+fi
+
+
+# apply OTA fixups
+rm -vfr recovery tools/*.sh
+((fw)) || rm -vfr images/{*.mbn,*update*}
+c=system/etc/security/otacerts.zip
+mv -v $c $c.orig
+
+m1=show_progress
+m2=unmount
+! ((fw)) || y='appsboot'
+f=META-INF/com/google/android/updater-script
+echo "sanitizing $f"
+sed -i "1,/^$m1/{/^$m1/!d};/$y\.mbn/d;/recovery/d;/^$m2/,/^$m2/{/^$m2/!d}" $f
+
+
+# repack update
+z=$t/${u##*/}
+z=${z%.*}-$x${fw:+fw}.zip
+! [ -e "$z" ] || mv -vi "$z" "$z.old"
+echo "creating archive '$z'"
+zip -qr $z .
+
+
+bye 0 $x: success.

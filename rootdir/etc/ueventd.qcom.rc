@@ -197,15 +197,6 @@
 # ESOC devices
 /dev/subsys_esoc*         0640   system     radio
 
-# ACOS_MOD_BEGIN {trapz}
-#trapz ringbuffer should only be accessible from root and system group
-/dev/trapz                0660   root       system
-# Havok buffer should only be readable from root and amz_log group
-/dev/hv                   0662   root       log
-/dev/hvd                  0662   root       log
-/dev/hvc                  0662   root       log
-# ACOS_MOD_END
-
 # ACOS_MOD_BEGIN {amazon_telephony}
 /dev/qmi*                 0640   radio      radio
 /dev/ttyUSB*              0640   radio      radio

@@ -100,11 +100,6 @@ service bt_hsic_control /system/bin/sh /system/etc/hsic.control.bt.sh
     user root
     disabled
 
-service havokd /system/xbin/havokd
-    oneshot
-    socket havok stream 766 system system
-    disabled
-
 on property:bluetooth.hsic_ctrl=load_wlan
     start bt_hsic_control
 

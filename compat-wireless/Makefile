@@ -15,8 +15,8 @@ DESTDIR?=
 
 ifneq ($(KERNELRELEASE),)
 
-NOSTDINC_FLAGS := -I$(M)/include/ \
-	-include $(M)/include/linux/compat-2.6.h \
+NOSTDINC_FLAGS := -I$(PWD)/$(M)/include/ \
+	-include $(PWD)/$(M)/include/linux/compat-2.6.h \
 	$(CFLAGS)
 
 obj-y := compat/

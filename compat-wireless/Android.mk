@@ -2,9 +2,9 @@ ifneq ($(TARGET_PRODUCT),$(filter $(TARGET_PRODUCT),bueller))
 
 LOCAL_PATH := $(call my-dir)
 ifeq ($(call is-platform-sdk-version-at-least,16),true)
-	DLKM_DIR := $(TOP)/device/qcom/common/dlkm
+	DLKM_DIR := $(LOCAL_PATH)/../dlkm
 else
-	DLKM_DIR := $(TOP)/device/qcom/common/dlkm
+	DLKM_DIR := $(LOCAL_PATH)/../dlkm
 endif
 
 ifeq ($(BOARD_HAS_ATH_WLAN), true)

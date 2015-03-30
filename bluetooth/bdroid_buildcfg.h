@@ -21,9 +21,6 @@
 
 #define BTM_DEF_LOCAL_NAME   "KFire HDX"
 
-// Disables read remote device feature
-#define BTA_SKIP_BLE_READ_REMOTE_FEAT TRUE
-
 // skips conn update at conn completion
 #define BTA_BLE_SKIP_CONN_UPD  TRUE
 

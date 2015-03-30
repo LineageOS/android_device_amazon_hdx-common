@@ -171,6 +171,10 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #	libbt-vendor
 
+# DTB Tool
+PRODUCT_PACKAGES += \
+	dtbToolCM
+
 PRODUCT_BOOT_JARS += \
 	qcmediaplayer
 

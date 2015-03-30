@@ -31,17 +31,16 @@ TARGET_KRAIT_BIONIC_PLDTHRESH := 10
 TARGET_KRAIT_BIONIC_BBTHRESH := 64
 TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
-# Kernel -> use prebuilt kernel ...
-ifeq ($(TARGET_DEVICE),thor)
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 mdss_mdp.panel=0:qcom,mdss_dsi_novatek_1080p_video androidboot.selinux=permissive
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-endif
-ifeq ($(TARGET_DEVICE),apollo)
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 mdss_mdp.panel=0:qcom,mdss_dsi_jdi_dualmipi0_video:1:qcom,mdss_dsi_jdi_dualmipi1_video: androidboot.selinux=permissive
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-endif
+# Kernel
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_SEPARATED_DT := true
+
+# Kernel config
+TARGET_KERNEL_SOURCE := kernel/amazon/hdx-common
+TARGET_KERNEL_CONFIG := msm8974-hdx_defconfig
+TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -DAMZ_HDX -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL

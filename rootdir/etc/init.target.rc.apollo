@@ -241,21 +241,11 @@ on property:sys.ims.QMI_DAEMON_STATUS=1
 on property:sys.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
 
-service check_shutdown /system/bin/auto_shutdown
-    class late_start
-    user root
-    oneshot
-
 service ppd /system/bin/mm-pp-daemon --enable-cabl --enable-ad
     class late_start
     user system
     socket pps stream 0660 system system graphics
     group system graphics
-
-service panelcal /system/bin/display-pp droid_set_pcc2mdp
-    class late_start
-    user root
-    oneshot
 
 service trigger_prov /system/bin/sh /sbin/check_prov.sh
     class late_start

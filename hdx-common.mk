@@ -190,11 +190,11 @@ PRODUCT_BOOT_JARS += \
 	qcmediaplayer
 
 # QC Perf
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_BUILD_PROPERTIES += \
 	ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
 # Common build.props
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_BUILD_PROPERTIES += \
 	ro.chipname=msm8974 \
 	ro.sf.lcd_density=320 \
 	ro.opengles.version=196608 \
@@ -203,7 +203,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	lockscreen.rot_override=true
 
 # Radio props
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_BUILD_PROPERTIES += \
 	rild.libpath=/system/lib/libril-lab126qmi.so \
 	ril.subscription.types=NV,RUIM \
 	persist.rild.nitz_plmn="" \
@@ -218,14 +218,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	DEVICE_PROVISIONED=1 \
 	ro.telephony.default_network=9
 
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_BUILD_PROPERTIES += \
 	debug.sf.hw=1 \
 	debug.egl.hw=1 \
 	persist.hwc.mdpcomp.enable=true \
 	debug.mdpcomp.logs=0 
 
 # new props test
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_BUILD_PROPERTIES += \
 	debug.composition.type=c2d \
 	sys.hwc.gpu_perf_mode=1 \
 	dev.pm.dyn_samplingrate=1 \
@@ -256,7 +256,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	keyguard.ori.timeout=350
 
 # audio/media props
-PRODUCT_PROPERTY_OVERRIDES += \
+ADDITIONAL_BUILD_PROPERTIES += \
 	media.aac_51_output_enabled=true \
 	vidc.debug.level=1 \
 	persist.audio.fluence.voicecall=true \

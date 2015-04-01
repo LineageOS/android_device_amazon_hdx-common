@@ -178,7 +178,6 @@ PRODUCT_PACKAGES += \
 # Wifi modules / Symlinks
 PRODUCT_PACKAGES += \
 	ath6kl_usb.ko \
-	wpa_supplicant_link \
 	WCNSS_qcom_cfg_link \
 	WCNSS_qcom_wlan_nv_link \
 	hw1.3_bdata_link \

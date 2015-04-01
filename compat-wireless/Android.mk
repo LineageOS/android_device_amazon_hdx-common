@@ -99,26 +99,6 @@ include $(DLKM_DIR)/AndroidKernelModule.mk
 
 include $(CLEAR_VARS)
 
-# wpa_supplicant.conf
-LOCAL_MODULE := wpa_supplicant_link
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := FAKE
-
-include $(BUILD_SYSTEM)/base_rules.mk
-
-$(LOCAL_BUILT_MODULE): TARGET := /system/etc/wifi/wpa_supplicant_ath6kl.conf
-$(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/etc/wifi/wpa_supplicant.conf
-$(LOCAL_BUILT_MODULE): wpa_supplicant.conf
-	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
-	$(hide) mkdir -p $(dir $@)
-	$(hide) mkdir -p $(dir $(SYMLINK))
-	$(hide) rm -rf $@
-	$(hide) rm -rf $(SYMLINK)
-	$(hide) ln -sf $(TARGET) $(SYMLINK)
-	$(hide) touch $@
-
-include $(CLEAR_VARS)
-
 # WCNSS_qcom_cfg.ini
 LOCAL_MODULE := WCNSS_qcom_cfg_link
 LOCAL_MODULE_TAGS := optional
@@ -128,6 +108,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): TARGET := /data/misc/wifi/WCNSS_qcom_cfg.ini
 $(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
 	$(hide) mkdir -p $(dir $@)
@@ -148,6 +129,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): TARGET := /persist/WCNSS_qcom_wlan_nv.bin
 $(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
 	$(hide) mkdir -p $(dir $@)
@@ -168,6 +150,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): TARGET := /system/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin_usb
 $(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/etc/firmware/ath6k/AR6004/hw1.3/bdata.bin
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
 	$(hide) mkdir -p $(dir $@)
@@ -188,6 +171,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): TARGET := /system/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin_usb
 $(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/etc/firmware/ath6k/AR6004/hw1.3/fw.ram.bin
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
 	$(hide) mkdir -p $(dir $@)
@@ -213,6 +197,7 @@ ifeq ($(TARGET_DEVICE),thor)
 $(LOCAL_BUILT_MODULE): TARGET := /system/etc/firmware/ath6k/AR6004/hw3.0/boardData_Thor_FCC.bin
 endif
 $(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/etc/firmware/ath6k/AR6004/hw3.0/bdata.bin
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
 	$(hide) mkdir -p $(dir $@)
@@ -233,6 +218,7 @@ include $(BUILD_SYSTEM)/base_rules.mk
 
 $(LOCAL_BUILT_MODULE): TARGET := /system/lib/modules/ath6kl-3.5/ath6kl_usb.ko
 $(LOCAL_BUILT_MODULE): SYMLINK := $(TARGET_OUT)/lib/modules/wlan.ko
+$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Symlink: $(SYMLINK) -> $(TARGET)"
 	$(hide) mkdir -p $(dir $@)

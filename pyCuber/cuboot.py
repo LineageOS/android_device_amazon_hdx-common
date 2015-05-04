@@ -34,25 +34,25 @@ def fixboot(fn):
     d = bytearray(f.read(p))
 
     # fix kernel cmdline
-    w = f.read(p)
-    m = None
-    if b'Amazon Apollo' in w:
-        m = b' mdss_mdp.panel=0:qcom,mdss_dsi_jdi_dualmipi0_video:1:qcom,mdss_dsi_jdi_dualmipi1_video:'
-    if b'Amazon Thor' in w:
-        m = b' mdss_mdp.panel=0:qcom,mdss_dsi_novatek_1080p_video'
-    if m and not m in b[64:576]:
-        f.seek(64 + b[64:].find(b'\x00'))
-        f.write(m)
+#    w = f.read(p)
+#    m = None
+#    if b'Amazon Apollo' in w:
+#        m = b' mdss_mdp.panel=0:qcom,mdss_dsi_jdi_dualmipi0_video:1:qcom,mdss_dsi_jdi_dualmipi1_video:'
+#    if b'Amazon Thor' in w:
+#        m = b' mdss_mdp.panel=0:qcom,mdss_dsi_novatek_1080p_video'
+#    if m and not m in b[64:576]:
+#        f.seek(64 + b[64:].find(b'\x00'))
+#        f.write(m)
 
     # convert DT from v2 to v1
-    if b'QCDT' == d[:4] and 2 == u4(d, 4):
-        n = 24 + 20 * u4(d, 8)
-        for i in range(24, n + 1, 20):
-            del d[i-4:i]
-            d += bytearray(4)
-        d[4] = 1
-        f.seek(s)
-        f.write(d)
+#    if b'QCDT' == d[:4] and 2 == u4(d, 4):
+#        n = 24 + 20 * u4(d, 8)
+#        for i in range(24, n + 1, 20):
+#            del d[i-4:i]
+#            d += bytearray(4)
+#        d[4] = 1
+#        f.seek(s)
+#        f.write(d)
 
     # compute image size
     s += up(u4(b, 40), p)

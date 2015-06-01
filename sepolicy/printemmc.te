@@ -1,0 +1,7 @@
+# printemmc
+type printemmc, domain;
+type printemmc_exec, exec_type, file_type;
+
+init_daemon_domain(printemmc)
+
+allow printemmc printemmc_exec:file rx_file_perms;

@@ -196,3 +196,9 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
         device/amazon/hdx-common/sepolicy
 
+BOARD_SEPOLICY_UNION += \
+	ath6kl-service.te \
+	printemmc.te \
+	startril.te \
+	sysinit.te \
+	tee.te

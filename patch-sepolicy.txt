@@ -1,0 +1,25 @@
+diff --git a/BoardConfigCommon.mk b/BoardConfigCommon.mk
+index 84a226f..d42b3ce 100755
+--- a/BoardConfigCommon.mk
++++ b/BoardConfigCommon.mk
+@@ -196,3 +196,9 @@ include device/qcom/sepolicy/sepolicy.mk
+ BOARD_SEPOLICY_DIRS += \
+         device/amazon/hdx-common/sepolicy
+ 
++BOARD_SEPOLICY_UNION += \
++	ath6kl-service.te \
++	printemmc.te \
++	startril.te \
++	sysinit.te \
++	tee.te
+diff --git a/sepolicy/file_contexts b/sepolicy/file_contexts
+index af3a9d5..7fa0eb7 100644
+--- a/sepolicy/file_contexts
++++ b/sepolicy/file_contexts
+@@ -18,3 +18,6 @@
+ /dev/socket/mpdecision(/.*)?          u:object_r:mpctl_socket:s0
+ /data/cam_socket.*                    u:object_r:camera_socket:s0
+ 
++/system/bin/wan_start                 u:object_r:startril_exec:s0
++/system/bin/ath6kl-service            u:object_r:ath6kl-service_exec:s0
++/system/bin/get_emmcid.sh             u:object_r:printemmc_exec:s0

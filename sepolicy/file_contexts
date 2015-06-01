@@ -18,3 +18,6 @@
 /dev/socket/mpdecision(/.*)?          u:object_r:mpctl_socket:s0
 /data/cam_socket.*                    u:object_r:camera_socket:s0
 
+/system/bin/wan_start                 u:object_r:startril_exec:s0
+/system/bin/ath6kl-service            u:object_r:ath6kl-service_exec:s0
+/system/bin/get_emmcid.sh             u:object_r:printemmc_exec:s0

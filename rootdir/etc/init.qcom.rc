@@ -1,4 +1,4 @@
-# Copyright (c) 2009-2012, 2014, The Linux Foundation. All rights reserved.
+# Copyright (c) 2009-2012,2014 The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -34,12 +34,9 @@ on early-init
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    mkdir /persistbackup 0770 root root
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage 0551 system sdcard_r
     mkdir /storage/emulated 0555 root root
-    mkdir /storage/emulated/legacy 0555 root root
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /storage/sdcard1 0700 root root
 
@@ -54,6 +51,7 @@ on init
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -61,11 +59,6 @@ on early-boot
     # Allow subsystem (modem etc) debugging
     write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
     write /sys/kernel/boot_adsp/boot 1
-    # Link in dxhdcp2 via fixup
-    exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
-
-    # Link in dxhdcp2 via fixup	63
-     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -90,9 +83,6 @@ on boot
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
 
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/device/extldo
-    chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
-
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -102,6 +92,13 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
+
+    #Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
+    mkdir /persist/drm 0770 system system
 
     setprop wifi.interface wlan0
 
@@ -121,9 +118,6 @@ on boot
 
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
-
-    #For bridgemgr daemon to inform the USB driver of the correct transport
-    chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
     # For setting tcp delayed ack
     chown system system /sys/kernel/ipv4/tcp_delack_seg
@@ -195,7 +189,12 @@ on boot
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    # Create directory for TZ Apps
+    mkdir /data/misc/qsee 0770 system system
+
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/misc/camera 0770 camera camera
+
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
@@ -212,14 +211,21 @@ on post-fs-data
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
 
-    mkdir /data/connectivity/nsrm 0771 system system
-    chown system system /data/connectivity/nsrm
+    # Create the directories used by DPM subsystem
+    mkdir /data/dpm 0771 system system
+    chown system system /data/dpm
+
+    mkdir /data/dpm/nsrm 0771 system system
+    chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
+
+    # Create directory used by display clients
+    mkdir /data/misc/display 0770 root system
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -240,16 +246,13 @@ on post-fs-data
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
-    #Create directories for gpsone_daemon services
-    mkdir /data/misc/gpsone_d 0770 system gps
-
-    #Create directories for QuIPS
-    mkdir /data/misc/quipc 0770 gps system
-
     #Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
+    mkdir /data/misc/location/gpsone_d 0770 system gps
+    mkdir /data/misc/location/quipc 0770 gps system
+    mkdir /data/misc/location/gsiff 0770 gps gps
 
     #Create directory from IMS services
     mkdir /data/shared 0755
@@ -272,19 +275,6 @@ on post-fs-data
     #Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
 
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/temp_comp
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/reg_read
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/stage_info
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/autotune
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/filp_config
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/calibrate
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/davetune
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/status
-    chown system system /sys/devices/f9967000.i2c/i2c-0/0-002c/reg_write
-
-    # fix audit daemon
-    mkdir /data/misc/audit 0777 audit system
-    chmod 0777 /data/misc/audit
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
@@ -296,10 +286,23 @@ service usbhub_init /system/bin/usbhub_init
 service qcomsysd /system/bin/qcom-system-daemon
     class main
 
+service ssr_setup /system/bin/ssr_setup
+    oneshot
+    disabled
+
+on property:wifi.change_nv_owner=1
+    chown wifi wifi /persist/WCNSS_qcom_wlan_nv.bin
+
+on property:persist.sys.ssr.restart_level=*
+    start ssr_setup
+
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
 
 on property:persist.radio.atfwd.start=false
+    stop atfwd
+
+on property:radio.atfwd.start=false
     stop atfwd
 
 # corefile limit and ETB enabling
@@ -321,7 +324,6 @@ on property:persist.debug.trace=1
     write /sys/bus/coresight/devices/coresight-etm1/enable 1
     write /sys/bus/coresight/devices/coresight-etm2/enable 1
     write /sys/bus/coresight/devices/coresight-etm3/enable 1
-    write /sys/module/coresight_event/parameters/event_abort_enable 1
 
 on property:ro.board.platform=msm7630_fusion
     start usbhub_init
@@ -375,9 +377,13 @@ on property:vold.decrypt=trigger_restart_framework
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service cnd /system/bin/cnd
+#service cnd /system/bin/cnd
+#    class late_start
+#    socket cnd stream 660 root inet
+
+service dpmd /system/bin/dpmd
     class late_start
-    socket cnd stream 660 root inet
+    socket dpmd stream 660 root system
 
 service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
     class main
@@ -465,24 +471,6 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     disabled
     oneshot
 
-service bridgemgrd /system/bin/bridgemgrd
-    class late_start
-    user radio
-    group radio qcom_diag
-    disabled
-
-service port-bridge /system/bin/port-bridge /dev/mhi_pipe_32 /dev/ttyGS0
-    class main
-    user radio system
-    group radio system inet
-    disabled
-
-service qmiproxy /system/bin/qmiproxy
-    class main
-    user radio
-    group radio qcom_diag
-    disabled
-
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
     class main
@@ -493,10 +481,6 @@ service qmuxd /system/bin/qmuxd
 service netmgrd /system/bin/netmgrd
     class main
     disabled
-
-#service qti /system/vendor/bin/qti
-#    class main
-#    disabled
 
 service sensors /system/bin/sensors.qcom
     class main
@@ -600,12 +584,6 @@ service ptt_ffbm /system/bin/ptt_socket_app -f -d
     disabled
     oneshot
 
-service ftm_ffbm /system/bin/ftmdaemon
-    user root
-    group root
-    disabled
-    oneshot
-
 service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
     class late_start
     disabled
@@ -636,57 +614,15 @@ service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
-    class main
-    disabled
-    oneshot
-
-service gpsone_daemon /system/bin/gpsone_daemon
-    class late_start
-    user gps
-    group gps inet net_raw
-    disabled
-
-service quipc_igsn /system/bin/quipc_igsn
-    class late_start
-    user gps
-    group inet gps qcom_diag
-    disabled
-
-service quipc_main /system/bin/quipc_main
-    class late_start
-    user gps
-    group gps net_admin wifi inet qcom_diag
-    disabled
-
-service location_mq /system/bin/location-mq
-    class late_start
-    user gps
-    group gps
-    disabled
-
-service xtwifi_inet /system/bin/xtwifi-inet-agent
-    class late_start
-    user gps
-    group inet gps
-    disabled
-
-service xtwifi_client /system/bin/xtwifi-client
-    class late_start
-    user gps
-    group net_admin wifi inet gps
-    disabled
-
-service lowi-server /system/bin/lowi-server
-    class late_start
-    user gps
-    group gps net_admin wifi inet qcom_diag
-    disabled
+#service loc_launcher /system/bin/loc_launcher
+#    #loc_launcher will start as root and set its uid to gps
+#    class late_start
+#    group gps qcom_oncrpc inet net_raw qcom_diag net_admin wifi
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
     user root
-    group system
+    group system fm_radio
     disabled
     oneshot
 
@@ -745,15 +681,6 @@ service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     oneshot
     disabled
 
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-    class late_start
-    group radio wifi inet
-    disabled
-    oneshot
-
-on property:persist.data.ds_fmc_app.mode=1
-    start ds_fmc_appd
-
 service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
     class late_start
     group net_bt_admin inet radio wifi
@@ -787,22 +714,53 @@ service ril-daemon2 /system/bin/rild -c 2
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
 
+#service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
+#    class late_start
+#    user root
+#    disabled
+#    oneshot
+
+#service usb_uicc_daemon /system/bin/usb_uicc_client
+#    class main
+#    user system
+#    group system log
+#    oneshot
+
+#on property:usb_uicc.enabled=1
+#    start usb_uicc_enable
+
+#on property:usb_uicc.enabled=0
+#    start usb_uicc_enable
+
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
     user root
     group root
     disabled
 
-service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+# virtual sdcard daemon running as media_rw (1023)
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
 
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
+#service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+#    class late_start
+#    disabled
+
+#service fuse_uicc0 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc0 /storage/uicc0
+#    class late_start
+#    disabled
+
+#service fuse_uicc1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc1 /storage/uicc1
+#    class late_start
+#    disabled
+
+#on property:ro.fuse_sdcard=true
+#    start sdcard
 
 # Binding fuse mount point to /storage/emulated/legacy
-on property:init.svc.sdcard=running
-    wait /mnt/shell/emulated/0
-    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
+#on property:init.svc.sdcard=running
+#    wait /mnt/shell/emulated/0
+#    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
@@ -817,6 +775,7 @@ service ssr_diag /system/bin/ssr_diag
     class late_start
     user system
     group system
+    disabled
 
 # Define fastmmi
 service fastmmi /system/bin/mmi
@@ -848,6 +807,16 @@ service charger_monitor /system/bin/charger_monitor
     group system
     disabled
 
+#service qbcharger /charger -m 1
+#    disabled
+#    oneshot
+
+#on property:sys.qbcharger.enable=true
+#    start qbcharger
+
+#on property:sys.qbcharger.enable=false
+#    stop qbcharger
+
 service diag_mdlog_start /system/bin/diag_mdlog
     class late_start
     user sdcard_rw
@@ -877,20 +846,3 @@ on property:persist.sys.rootagent=1
     start rootagent
 on property:persist.sys.rootagent=0
     stop rootagent
-
-service qcom-sensor-sh /system/bin/sh /init.qcom.sensor.sh
-	class main
-	user root
-	oneshot
-
-service fqc_cmdd /system/bin/sh /persistbackup/FQC/FQC_init.sh
-       class main
-       user root
-       group root
-       oneshot
-
-service cmdd /sbin/cmdd
-       class main
-       user root
-       group root
-       oneshot

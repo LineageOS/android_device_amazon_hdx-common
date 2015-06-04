@@ -1,1 +1,2 @@
 allow init shell_data_file:fifo_file getattr;
+allow init persist_file:filesystem relabelto;

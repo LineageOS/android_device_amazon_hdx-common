@@ -5,3 +5,4 @@ type startril_exec, exec_type, file_type;
 init_daemon_domain(startril)
 
 allow startril startril_exec:file rx_file_perms;
+allow startril shell_exec:file read;

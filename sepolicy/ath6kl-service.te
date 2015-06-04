@@ -5,3 +5,5 @@ type ath6kl-service_exec, exec_type, file_type;
 init_daemon_domain(ath6kl-service)
 
 allow ath6kl-service ath6kl-service_exec:file rx_file_perms;
+allow ath6kl-service cnd_data_file:dir read;
+allow ath6kl-service self:capability { dac_read_search dac_override };

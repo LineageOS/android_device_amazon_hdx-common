@@ -1,1 +1,2 @@
 allow bluetooth btlock_file:chr_file rw_file_perms;
+allow bluetooth cnd_data_file:dir { search };

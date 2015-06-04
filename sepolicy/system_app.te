@@ -7,3 +7,6 @@ allow system_app vibeamp_sysfs:file rw_file_perms;
 
 # for Settings' access to DisplayCalibration
 allow system_app kcal_sysfs:file rw_file_perms;
+
+# init
+allow system_app shell_data_file:dir { search };

@@ -8,11 +8,16 @@
 /sys/devices/platform/tspdrv/nforce_timed           u:object_r:vibeamp_sysfs:s0
 
 
+# sensors
 /data/app/sensor_ctl_socket           u:object_r:sensors_socket:s0
+
+# bluetooth
 /dev/rfkill                           u:object_r:rfkill_device:s0
-/sns(/.*)?                            u:object_r:sensors_persist_file:s0
+/dev/ttyHS0                           u:object_r:hci_attach_dev:s0
+
 /data/system/default_values           u:object_r:mpdecision_data:s0
 /dev/btlock                           u:object_r:btlock_file:s0
+/dev/rmnet_mux_ctrl                   u:object_r:rmnet_device:s0
 
 /dev/bcm2079x                         u:object_r:nfc_device:s0
 /dev/socket/mpdecision(/.*)?          u:object_r:mpctl_socket:s0

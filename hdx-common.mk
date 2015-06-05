@@ -42,14 +42,11 @@ PRODUCT_PACKAGES += \
 	init.qcom.usb.rc \
 	init.target.rc \
 	init.class_main.sh \
-	init.mdm.sh \
 	init.qcom.class_core.sh \
-	init.qcom.early_boot.sh \
 	init.qcom.factory.sh \
 	init.qcom.sensor.sh \
 	init.qcom.sh \
 	init.qcom.ssr.sh \
-	init.qcom.syspart_fixup.sh \
 	init.qcom.usb.sh \
 	ueventd.qcom.rc \
 	init.recovery.qcom.rc

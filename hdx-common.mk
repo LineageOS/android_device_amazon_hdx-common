@@ -167,6 +167,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
 	qcmediaplayer
 
+# ABI fixes for old binaries
+PRODUCT_PACKAGES += \
+	libshim_libbinder
+
 # QC Perf
 ADDITIONAL_BUILD_PROPERTIES += \
 	ro.vendor.extension_library=/vendor/lib/libqc-opt.so

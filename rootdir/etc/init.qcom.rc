@@ -33,6 +33,8 @@ on early-init
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
+    export LD_SHIM_LIBS /system/lib/libbinder.so|libshim_libbinder.so
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 

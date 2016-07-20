@@ -37,8 +37,13 @@ BOARD_KERNEL_SEPARATED_DT := true
 
 # Kernel config
 TARGET_KERNEL_SOURCE := kernel/amazon/hdx-common
-TARGET_KERNEL_CONFIG := msm8974-hdx_defconfig
+ifeq ($(TARGET_BUILD_VARIANT),user)
+TARGET_KERNEL_CONFIG ?= msm8974-hdx-perf_defconfig
+else
+TARGET_KERNEL_CONFIG ?= msm8974-hdx_defconfig
+endif
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD

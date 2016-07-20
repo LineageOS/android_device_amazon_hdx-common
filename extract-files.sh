@@ -53,10 +53,14 @@ fi
 BASE=../../../vendor/$VENDOR/hdx-common/proprietary
 rm -rf $BASE/*
 
+ADRENOBASE=../../../vendor/$VENDOR/adreno-330/proprietary
+rm -rf $ADRENOBASE/*
+
 DEVBASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $DEVBASE/*
 
 extract ../../$VENDOR/hdx-common/proprietary-files.txt $BASE
+extract ../../$VENDOR/hdx-common/proprietary-adreno-files.txt $ADRENOBASE
 extract ../../$VENDOR/$DEVICE/proprietary-files.txt $DEVBASE
 
 ../hdx-common/setup-makefiles.sh

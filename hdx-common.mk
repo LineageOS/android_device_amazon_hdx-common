@@ -153,8 +153,8 @@ PRODUCT_PACKAGES += \
 	libcryptfs_hw
 
 # BT
-#PRODUCT_PACKAGES += \
-#	libbt-vendor
+PRODUCT_PACKAGES += \
+	libbt-vendor
 
 # DTB Tool
 PRODUCT_PACKAGES += \
@@ -253,3 +253,5 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk
 # call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
+# set private bt-vendor source
+$(call project-set-path-variant,bt-vendor,amazon-hdx,device/amazon/hdx-common/libbt-vendor)

@@ -169,7 +169,8 @@ PRODUCT_BOOT_JARS += \
 
 # ABI fixes for old binaries
 PRODUCT_PACKAGES += \
-	libshim_libbinder
+	libshim_libbinder \
+	libshim_liblog
 
 # QC Perf
 ADDITIONAL_BUILD_PROPERTIES += \

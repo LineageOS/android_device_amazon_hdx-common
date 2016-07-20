@@ -1,4 +1,3 @@
-
 BOARD_VENDOR := amazon
 
 # headers
@@ -24,7 +23,6 @@ TARGET_CPU_VARIANT := krait
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # Krait optimizations
-TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
 TARGET_USE_KRAIT_PLD_SET := true
 TARGET_KRAIT_BIONIC_PLDOFFS := 10
 TARGET_KRAIT_BIONIC_PLDTHRESH := 10
@@ -43,17 +41,12 @@ TARGET_KERNEL_CONFIG := msm8974-hdx_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
 # Flags
-COMMON_GLOBAL_CFLAGS += -DAMAZON_LOG -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
-#-DQCOM_HARDWARE -DQCOM_BSP -DUSE_ION 
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-#TARGET_QCOM_DISPLAY_VARIANT := caf-hdx
-#TARGET_QCOM_MEDIA_VARIANT := caf-hdx
-#TARGET_QCOM_AUDIO_VARIANT := caf-hdx
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -141,12 +134,6 @@ WIFI_DRIVER_FW_PATH_P2P			:= "p2p"
 WIFI_DRIVER_FW_PATH_PARAM		:= "/sys/module/wlan/parameters/fwpath"
 WIFI_DRIVER_MODULE_PATH 		:= "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME 		:= "wlan"
-# not working "wcnss_service"
-#TARGET_USES_QCOM_WCNSS_QMI := true
-#TARGET_USES_WCNSS_CTRL := false
-#TARGET_PROVIDES_WCNSS_QMI		:= true
-#TARGET_USES_WCNSS_MAC_ADDR_REV		:= true
-# not working "wcnss_service"
 
 # NFC
 BOARD_HAVE_NFC := false
@@ -196,9 +183,3 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
         device/amazon/hdx-common/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-	ath6kl-service.te \
-	printemmc.te \
-	startril.te \
-	sysinit.te \
-	tee.te

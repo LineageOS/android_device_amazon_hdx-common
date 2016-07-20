@@ -160,15 +160,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	dtbToolCM
 
-# Wifi modules / Symlinks
+# Wifi module
 PRODUCT_PACKAGES += \
-	ath6kl_usb.ko \
-	WCNSS_qcom_cfg_link \
-	WCNSS_qcom_wlan_nv_link \
-	hw1.3_bdata_link \
-	hw1.3_fw.ram_link \
-	hw3.0_bdata_link \
-	wlan_ko_link
+	ath6kl_usb.ko
 
 PRODUCT_BOOT_JARS += \
 	qcmediaplayer

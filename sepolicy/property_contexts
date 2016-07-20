@@ -1,1 +1,4 @@
 persist.ril.               u:object_r:radio_prop:s0
+radio.use-ppp              u:object_r:radio_prop:s0
+keyguard.no_require_sim    u:object_r:radio_prop:s0
+qcom.bluetooth.            u:object_r:bluetooth_prop:s0

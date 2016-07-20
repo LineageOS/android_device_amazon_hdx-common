@@ -1,5 +1,4 @@
 /dev/block/platform/msm_sdcc\.1/by-name/encrypt     u:object_r:encrypt_block_device:s0
-/dev/block/platform/msm_sdcc\.1/by-name/misc        u:object_r:misc_block_device:s0
 
 /sys/devices/platform/kcal_ctrl\.0/kcal.*            u:object_r:kcal_sysfs:s0
 
@@ -26,3 +25,4 @@
 /system/bin/wan_start                 u:object_r:startril_exec:s0
 /system/bin/ath6kl-service            u:object_r:ath6kl-service_exec:s0
 /system/bin/get_emmcid.sh             u:object_r:printemmc_exec:s0
+/system/bin/thermal-engine            u:object_r:thermal-engine_exec:s0

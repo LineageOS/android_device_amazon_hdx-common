@@ -1,2 +1,8 @@
-allow init shell_data_file:fifo_file getattr;
+allow init debugfs:dir mounton;
 allow init persist_file:filesystem relabelto;
+allow init self:socket { read write create ioctl };
+allow init shell_data_file:fifo_file getattr;
+allow init smem_log_device:chr_file { write ioctl };
+allow init socket_device:sock_file { create setattr };
+allow init sysfs_mpdecision:file getattr;
+allow init thermal_device:chr_file write;

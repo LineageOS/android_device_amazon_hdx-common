@@ -44,6 +44,9 @@ on init
     # session is not exercised through RemoteDisplay in the android framework
     setprop persist.sys.wfd.virtual 0
 
+on post-fs
+    export LD_PRELOAD libNimsWrap.so
+
 on fs
     mount_all fstab.qcom
 
@@ -150,9 +153,10 @@ service qseecomd /system/bin/qseecomd
    user root
    group root
 
-service mpdecision /system/bin/mpdecision --avg_comp
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
    class main
    user root
+   group root system
    disabled
 
 service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml

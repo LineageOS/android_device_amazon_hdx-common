@@ -186,6 +186,8 @@ endif
 # hdx old bootloader dtb compatibility fix + bootloader signature exploit patch
 BOARD_CUSTOM_BOOTIMG_MK := device/amazon/hdx-common/mkboot.mk
 
+SMALLER_FONT_FOOTPRINT := true
+
 # SELinux policies
 # qcom sepolicy
 include device/qcom/sepolicy/sepolicy.mk

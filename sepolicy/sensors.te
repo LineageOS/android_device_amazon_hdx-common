@@ -1,7 +1,6 @@
 # Stupid blob uses /data/app for the socket, allow creation...
 allow sensors apk_data_file:dir { write remove_name add_name };
 allow sensors self:capability sys_nice;
-allow sensors persist_file:file { getattr read write open };
-allow sensors persist_file:dir { getattr search };
-
+allow sensors persist_file:file create_file_perms;
+allow sensors persist_file:dir rw_dir_perms;
 type_transition sensors apk_data_file:sock_file sensors_socket "sensor_ctl_socket";

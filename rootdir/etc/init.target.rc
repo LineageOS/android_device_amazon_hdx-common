@@ -37,8 +37,6 @@ on early-init
     chown system system /sys/devices/virtual/graphics/fb1/ad
 
 on init
-    loglevel 7
-
     # Set the property to indicate type of virtual display to 0
     # 0 indicates that virtual display is not a Wifi display and that the
     # session is not exercised through RemoteDisplay in the android framework

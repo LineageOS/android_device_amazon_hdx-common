@@ -22,6 +22,8 @@ LOCAL_CFLAGS = -Wall -Werror
 #Debug logs are enabled
 #LOCAL_CFLAGS += -DDISABLE_DEBUG_LOG
 
+LOCAL_CLANG := false
+
 LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/../stack/common \
         frameworks/native/include/media/hardware \

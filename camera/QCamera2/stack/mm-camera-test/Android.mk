@@ -74,6 +74,8 @@ else
 endif
 LOCAL_CFLAGS += -Wall -Werror
 
+LOCAL_CLANG := false
+
 LOCAL_SHARED_LIBRARIES:= \
          libcutils libdl
 

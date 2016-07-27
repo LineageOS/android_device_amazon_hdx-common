@@ -13,6 +13,8 @@ omx_core_defines:= -Werror \
 
 LOCAL_CFLAGS := $(omx_core_defines)
 
+LOCAL_CLANG := false
+
 OMX_HEADER_DIR := frameworks/native/include/media/openmax
 
 LOCAL_C_INCLUDES := $(OMX_HEADER_DIR)

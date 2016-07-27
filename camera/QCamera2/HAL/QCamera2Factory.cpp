@@ -100,6 +100,34 @@ int QCamera2Factory::get_camera_info(int camera_id, struct camera_info *info)
 }
 
 /*===========================================================================
+ * FUNCTION   : open_legacy
+ *
+ * DESCRIPTION: Function to open older hal version implementation
+ *
+ * PARAMETERS :
+ *   @hw_device : ptr to struct storing camera hardware device info
+ *   @camera_id : camera ID
+ *   @halVersion: Based on camera_module_t.common.module_api_version
+ *
+ * RETURN     : 0  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+int QCamera2Factory::open_legacy(const struct hw_module_t* module,
+            const char* id, uint32_t halVersion, struct hw_device_t** device)
+{
+    if (module != &HAL_MODULE_INFO_SYM.common) {
+        ALOGE("Invalid module. Trying to open %p, expect %p",
+            module, &HAL_MODULE_INFO_SYM.common);
+        return INVALID_OPERATION;
+    }
+    if (!id) {
+        ALOGE("Invalid camera id");
+        return BAD_VALUE;
+    }
+    return gQCamera2Factory.openLegacy(atoi(id), halVersion, device);
+}
+
+/*===========================================================================
  * FUNCTION   : getNumberOfCameras
  *
  * DESCRIPTION: query number of cameras detected
@@ -204,5 +232,53 @@ int QCamera2Factory::camera_device_open(
 struct hw_module_methods_t QCamera2Factory::mModuleMethods = {
     open: QCamera2Factory::camera_device_open,
 };
+
+/*===========================================================================
+ * FUNCTION   : openLegacy
+ *
+ * DESCRIPTION: Function to open older hal version implementation
+ *
+ * PARAMETERS :
+ *   @camera_id : camera ID
+ *   @halVersion: Based on camera_module_t.common.module_api_version
+ *   @hw_device : ptr to struct storing camera hardware device info
+ *
+ * RETURN     : 0  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+int QCamera2Factory::openLegacy(
+        int32_t cameraId, uint32_t halVersion, struct hw_device_t** hw_device)
+{
+    int rc = NO_ERROR;
+
+    ALOGI(":%s openLegacy halVersion: %d", __func__, halVersion);
+    //Assumption: all cameras can support legacy API version
+    if (cameraId < 0 || cameraId >= gQCamera2Factory.getNumberOfCameras())
+        return -ENODEV;
+
+    switch(halVersion)
+    {
+        case CAMERA_DEVICE_API_VERSION_1_0:
+        {
+            QCamera2HardwareInterface *hw =
+                new QCamera2HardwareInterface((uint32_t)cameraId);
+            if (!hw) {
+                ALOGE("%s: Allocation of hardware interface failed", __func__);
+                return NO_MEMORY;
+            }
+            rc = hw->openCamera(hw_device);
+            if (rc != NO_ERROR) {
+                delete hw;
+            }
+            break;
+        }
+        default:
+            ALOGE("%s: Device API version: %d for camera id %d invalid",
+                __func__, halVersion, cameraId);
+            return BAD_VALUE;
+    }
+
+    return rc;
+}
 
 }; // namespace qcamera

@@ -46,6 +46,8 @@ public:
 
     static int get_number_of_cameras();
     static int get_camera_info(int camera_id, struct camera_info *info);
+    static int open_legacy(const struct hw_module_t* module,
+            const char* id, uint32_t halVersion, struct hw_device_t** device);
 
 private:
     int getNumberOfCameras();
@@ -53,6 +55,8 @@ private:
     int cameraDeviceOpen(int camera_id, struct hw_device_t **hw_device);
     static int camera_device_open(const struct hw_module_t *module, const char *id,
                 struct hw_device_t **hw_device);
+    static int openLegacy(
+            int32_t cameraId, uint32_t halVersion, struct hw_device_t** hw_device);
 
 public:
     static struct hw_module_methods_t mModuleMethods;

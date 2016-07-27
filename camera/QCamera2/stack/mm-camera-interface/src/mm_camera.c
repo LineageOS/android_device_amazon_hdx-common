@@ -531,6 +531,9 @@ int32_t mm_camera_set_parms(mm_camera_obj_t *my_obj,
     if (parms !=  NULL) {
         rc = mm_camera_util_s_ctrl(my_obj->ctrl_fd, CAM_PRIV_PARM, &value);
     }
+    if (rc != 0) {
+        CDBG_ERROR("%s: mm_camera_util_s_ctrl, rc = %d\n", __func__, rc);
+    }
     pthread_mutex_unlock(&my_obj->cam_lock);
     return rc;
 }
@@ -561,6 +564,9 @@ int32_t mm_camera_get_parms(mm_camera_obj_t *my_obj,
     if (parms != NULL) {
         rc = mm_camera_util_g_ctrl(my_obj->ctrl_fd, CAM_PRIV_PARM, &value);
     }
+    if (rc != 0) {
+        CDBG_ERROR("%s: mm_camera_util_g_ctrl, rc = %d\n", __func__, rc);
+    }
     pthread_mutex_unlock(&my_obj->cam_lock);
     return rc;
 }
@@ -584,6 +590,9 @@ int32_t mm_camera_do_auto_focus(mm_camera_obj_t *my_obj)
     int32_t rc = -1;
     int32_t value = 0;
     rc = mm_camera_util_s_ctrl(my_obj->ctrl_fd, CAM_PRIV_DO_AUTO_FOCUS, &value);
+    if (rc != 0) {
+        CDBG_ERROR("%s: mm_camera_util_s_ctrl, rc = %d\n", __func__, rc);
+    }
     pthread_mutex_unlock(&my_obj->cam_lock);
     return rc;
 }
@@ -605,6 +614,9 @@ int32_t mm_camera_cancel_auto_focus(mm_camera_obj_t *my_obj)
     int32_t rc = -1;
     int32_t value = 0;
     rc = mm_camera_util_s_ctrl(my_obj->ctrl_fd, CAM_PRIV_CANCEL_AUTO_FOCUS, &value);
+    if (rc != 0) {
+        CDBG_ERROR("%s: mm_camera_util_s_ctrl, rc = %d\n", __func__, rc);
+    }
     pthread_mutex_unlock(&my_obj->cam_lock);
     return rc;
 }

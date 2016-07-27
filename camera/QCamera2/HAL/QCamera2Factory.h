@@ -32,7 +32,7 @@
 
 #include <hardware/camera.h>
 #include <system/camera.h>
-#include <media/msmb_camera.h>
+#include <media/msmb_camera_amz.h>
 
 #include "QCamera2HWI.h"
 

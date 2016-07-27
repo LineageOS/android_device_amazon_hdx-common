@@ -33,7 +33,7 @@
 #include <stdint.h>
 #include <pthread.h>
 #include <inttypes.h>
-#include <media/msmb_camera.h>
+#include <media/msmb_camera_amz.h>
 #include <stdlib.h>
 #include <string.h>
 

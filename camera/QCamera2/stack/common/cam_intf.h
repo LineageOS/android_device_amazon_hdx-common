@@ -30,7 +30,7 @@
 #ifndef __QCAMERA_INTF_H__
 #define __QCAMERA_INTF_H__
 
-#include <media/msmb_isp.h>
+#include <media/msmb_isp_amz.h>
 #include "cam_types.h"
 
 #define CAM_PRIV_IOCTL_BASE (V4L2_CID_PRIVATE_BASE + 14)

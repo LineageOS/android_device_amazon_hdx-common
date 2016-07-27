@@ -126,6 +126,15 @@ typedef struct{
     uint8_t livesnapshot_sizes_tbl_cnt;                     /* livesnapshot sizes table size */
     cam_dimension_t livesnapshot_sizes_tbl[MAX_SIZES_CNT];  /* livesnapshot sizes table */
 
+    uint8_t reserved1;                                      /* Amazon Reserved #1 */
+    uint8_t reserved2;                                      /* Amazon Reserved #2 */
+    uint8_t reserved3;                                      /* Amazon Reserved #3 */
+    uint8_t reserved4;                                      /* Amazon Reserved #4 */
+    uint8_t reserved5;                                      /* Amazon Reserved #5 */
+    uint8_t reserved6;                                      /* Amazon Reserved #6 */
+    uint8_t reserved7;                                      /* Amazon Reserved #7 */
+    uint8_t reserved8;                                      /* Amazon Reserved #8 */
+
     uint8_t hfr_tbl_cnt;                                    /* table size for HFR */
     cam_hfr_info_t hfr_tbl[CAM_HFR_MODE_MAX];               /* HFR table */
 

@@ -169,6 +169,10 @@ PRODUCT_PACKAGES += \
 	libshim_libbinder \
 	libshim_liblog
 
+# Gello
+PRODUCT_PACKAGES += \
+	Gello
+
 # QC Perf
 ADDITIONAL_BUILD_PROPERTIES += \
 	ro.vendor.extension_library=/vendor/lib/libqc-opt.so

@@ -87,7 +87,6 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amazon/hdx-common/bluetoot
 BOARD_CHARGER_RES := device/amazon/hdx-common/charger
 
 # Graphics
-BOARD_EGL_CFG := device/amazon/hdx-common/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_OVERLAY := true

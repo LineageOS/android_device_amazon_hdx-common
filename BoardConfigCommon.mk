@@ -193,3 +193,4 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
         device/amazon/hdx-common/sepolicy
 
+MALLOC_SVELTE := true

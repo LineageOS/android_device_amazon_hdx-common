@@ -168,7 +168,8 @@ PRODUCT_BOOT_JARS += \
 # ABI fixes for old binaries
 PRODUCT_PACKAGES += \
 	libshim_libbinder \
-	libshim_liblog
+	libshim_liblog \
+	libshim_libwvm
 
 # Gello
 PRODUCT_PACKAGES += \

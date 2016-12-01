@@ -248,7 +248,9 @@ ADDITIONAL_BUILD_PROPERTIES += \
 	vidc.debug.level=1 \
 	persist.audio.fluence.voicecall=true \
 	audio.offload.buffer.size.kb=32 \
-	av.offload.enable=true
+	av.offload.enable=true \
+	media.stagefright.legacyencoder=true \
+	media.stagefright.less-secure=true
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

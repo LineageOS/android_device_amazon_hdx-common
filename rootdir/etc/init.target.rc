@@ -392,11 +392,6 @@ service qca6234-service /system/bin/sh /system/etc/qca6234-service.sh
     user root
     oneshot
 
-service printemmc /system/bin/get_emmcid.sh
-    class late_start
-    user root
-    oneshot
-
 service trigger_prov /system/bin/sh /sbin/check_prov.sh
     class late_start
     user root

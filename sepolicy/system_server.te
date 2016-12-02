@@ -3,3 +3,4 @@ allow system_server self:unix_stream_socket ioctl;
 allow system_server sensors_data_file:sock_file { getattr rw_file_perms };
 allow system_server sensors_data_file:dir search;
 allow system_server time_daemon:unix_stream_socket connectto;
+allow system_server sysfs_thermal:file r_file_perms;

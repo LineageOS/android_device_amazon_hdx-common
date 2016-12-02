@@ -1,8 +1,12 @@
+allow qti_init_shell bluetooth_data_file:file getattr;
+allow qti_init_shell bluetooth_loader_exec:file { open read };
+allow qti_init_shell bluetooth_prop:property_service { set };
 allow qti_init_shell btnvtool_exec:file { read getattr open execute execute_no_trans };
+allow qti_init_shell cnd_data_file:dir search;
 allow qti_init_shell ctl_default_prop:property_service { set };
-allow qti_init_shell sensors_prop:property_service set;
 allow qti_init_shell kernel:process { setsched };
 allow qti_init_shell radio_prop:property_service { set };
-allow qti_init_shell bluetooth_prop:property_service { set };
 allow qti_init_shell sensors_persist_file:file { write };
-allow qti_init_shell cnd_data_file:dir search;
+allow qti_init_shell sensors_prop:file { getattr open read };
+allow qti_init_shell sensors_prop:property_service set;
+allow qti_init_shell sysfs_devices_system_cpu:file setattr;

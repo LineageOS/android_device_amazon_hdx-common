@@ -99,6 +99,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	gps.msm8974
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/etc/flp.conf:system/etc/flp.conf \
+	$(LOCAL_PATH)/configs/etc/gps.conf:system/etc/gps.conf \
+	$(LOCAL_PATH)/configs/etc/izat.conf:system/etc/izat.conf \
+	$(LOCAL_PATH)/configs/etc/lowi.conf:system/etc/lowi.conf \
+
 # Lights
 PRODUCT_PACKAGES += \
 	lights.msm8974

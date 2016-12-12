@@ -119,5 +119,7 @@
     <!-- <integer name="config_wifi_driver_stop_delay">120000</integer> //-->
     <string name="config_wifi_p2p_device_type">1-0050F204-9</string>
 
+    <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
+
 </resources>
 

@@ -110,5 +110,14 @@
     <!-- Whether UI for multi user should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
 
+    <bool name="wifi_autocon">false</bool>
+    <bool name="config_wifi_dual_band_support">true</bool>
+    <bool name="config_wifi_hotspot2_enabled">false</bool>
+    <bool name="config_enableWifiDisplay">false</bool>
+    <bool name="config_wifiDisplaySupportsProtectedBuffers">true</bool>
+    <integer name="config_networkAvoidBadWifi">0</integer>
+    <!-- <integer name="config_wifi_driver_stop_delay">120000</integer> //-->
+    <string name="config_wifi_p2p_device_type">1-0050F204-9</string>
+
 </resources>
 

@@ -24,32 +24,41 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <integer-array name="config_autoBrightnessLevels">
-        <item>10</item>
-        <item>50</item>
-        <item>100</item>
-        <item>200</item>
-        <item>400</item>
-        <item>500</item>
-        <item>800</item>
-        <item>1000</item>
-        <item>1600</item>
-        <item>3000</item>
-        <item>10000</item>
+        <item>11</item>
+        <item>22</item>
+        <item>43</item>
+        <item>62</item>
+        <item>94</item>
+        <item>151</item>
+        <item>242</item>
+        <item>378</item>
+        <item>601</item>
+        <item>965</item>
+        <item>1543</item>
+        <item>2467</item>
+        <item>3980</item>
+        <item>6372</item>
+        <item>10186</item>
+        <item>12000</item>
     </integer-array>
 
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>7</item>   <!-- 0-10 -->
-        <item>15</item>   <!-- 10-50 -->
-        <item>43</item>   <!-- 50-100 -->
-        <item>63</item>   <!-- 100-200 -->
-        <item>85</item>   <!-- 200-400 -->
-        <item>94</item>   <!-- 400-500 -->
-        <item>110</item>  <!-- 500-800 -->
-        <item>126</item>  <!-- 800-1000 -->
-        <item>162</item>  <!-- 1000-1600 -->
-        <item>196</item>  <!-- 1600-3000 -->
-        <item>250</item>  <!-- 3000-10000 -->
-        <item>255</item>  <!-- 10000+ -->
+        <item>10</item>
+        <item>35</item>
+        <item>59</item>
+        <item>84</item>
+        <item>108</item>
+        <item>132</item>
+        <item>157</item>
+        <item>181</item>
+        <item>206</item>
+        <item>230</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Whether WiFi display is supported by this device.

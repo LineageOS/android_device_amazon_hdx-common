@@ -69,6 +69,15 @@ PRODUCT_PACKAGES += \
 	libqcomvisualizer \
 	libqcomvoiceprocessing
 
+# Device config files
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/usr/idc/amazon_touch.idc:system/usr/idc/amazon_touch.idc \
+	$(LOCAL_PATH)/configs/usr/keylayout/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/msm8974-taiko-tablet-snd-card_JACK.kl:system/usr/keylayout/msm8974-taiko-tablet-snd-card_JACK.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/Vendor_1949_Product_0402.kl:system/usr/keylayout/Vendor_1949_Product_0402.kl
+
 # Charger
 PRODUCT_PACKAGES += \
 	charger \

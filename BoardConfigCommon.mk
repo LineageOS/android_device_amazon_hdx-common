@@ -22,6 +22,11 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
+# Amazon KitKat libraries have text relocations, don't error out when
+# using them.  TODO: Look through each lib which generates this error
+# and see if there are possible replacements using other device binaries
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+
 # Kernel
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_KERNEL_BASE := 0x00000000

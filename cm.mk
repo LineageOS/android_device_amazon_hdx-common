@@ -12,5 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# CM overlay
+DEVICE_PACKAGE_OVERLAYS += device/amazon/hdx-common/overlay-cm
+
 # Inherit some common cyanogenmod stuff.
 $(call inherit-product-if-exists, vendor/cm/config/common_full_tablet_wifionly.mk)

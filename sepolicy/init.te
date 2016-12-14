@@ -1,4 +1,5 @@
 allow init debugfs:dir mounton;
+allow init debugfs:file write;
 allow init persist_file:filesystem relabelto;
 allow init self:socket { read write create ioctl };
 allow init shell_data_file:fifo_file getattr;

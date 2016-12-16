@@ -412,6 +412,7 @@ static int bt_powerup(int en )
         goto done;
     }
 #endif
+#ifdef USE_EXTERNAL_RFKILL_LDO
     ret = asprintf(&enable_ldo_path, "/sys/class/rfkill/rfkill%d/device/extldo", rfkill_id);
     if( (ret < 0 ) || (enable_ldo_path == NULL) )
     {
@@ -432,6 +433,7 @@ static int bt_powerup(int en )
         ALOGI("External LDO has been configured");
         enable_extldo = TRUE;
     }
+#endif
 
     ALOGE("Write %c to rfkill\n", on);
 

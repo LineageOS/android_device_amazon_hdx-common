@@ -78,7 +78,6 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAS_QCA_BT_AR3002 := true
 QCOM_BT_USE_SMD_TTY := true
-WIFI_BT_STATUS_SYNC := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amazon/hdx-common/bluetooth
 
 # chargers

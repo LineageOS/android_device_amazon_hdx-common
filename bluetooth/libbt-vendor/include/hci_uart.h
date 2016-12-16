@@ -1,10 +1,11 @@
-/******************************************************************************
- *
+/*
+ *  Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ *  Not a Contribution.
  *  Copyright (C) 2009-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at:
+ *  You may obtain a copy of the License at
  *
  *  http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -13,27 +14,14 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
- ******************************************************************************/
+ */
 
-/******************************************************************************
- *
- *  Filename:      userial_vendor.h
- *
- *  Description:   Contains vendor-specific definitions used in serial port
- *                 controls
- *
- ******************************************************************************/
+#ifndef HCI_UART_H
+#define HCI_UART_H
 
-#ifndef USERIAL_VENDOR_H
-#define USERIAL_VENDOR_H
-
-#include "bt_vendor_qcom.h"
-#include "userial.h"
-
-/******************************************************************************
-**  Constants & Macros
-******************************************************************************/
+/* Variables to identify the platform */
+/*BT HS UART TTY DEVICE */
+#define BT_HS_UART_DEVICE "/dev/ttyHS0"
 
 /**** baud rates ****/
 #define USERIAL_BAUD_300        0
@@ -71,6 +59,19 @@
 #define USERIAL_DATABITS_7      (1<<8)
 #define USERIAL_DATABITS_8      (1<<9)
 
+/* HCI Packet types */
+#define HCI_COMMAND_PKT     0x01
+#define HCI_ACLDATA_PKT      0x02
+#define HCI_SCODATA_PKT     0x03
+#define HCI_EVENT_PKT           0x04
+#define HCI_VENDOR_PKT        0xff
+
+/* HCI Command/Event Opcode */
+#define HCI_RESET                       0x0C03
+#define EVT_CMD_COMPLETE       0x0E
+
+/* Command opcode pack/unpack */
+#define cmd_opcode_pack(ogf, ocf)   (uint16_t)((ocf & 0x03ff)|(ogf << 10))
 
 #if (BT_WAKE_VIA_USERIAL_IOCTL==TRUE)
 /* These are the ioctl values used for bt_wake ioctl via UART driver. you may
@@ -88,6 +89,10 @@
 #endif
 #endif // (BT_WAKE_VIA_USERIAL_IOCTL==TRUE)
 
+/* UART CLOCK IOCTLS*/
+#define USERIAL_OP_CLK_ON 0x5441
+#define USERIAL_OP_CLK_OFF 0x5442
+#define USERIAL_OP_CLK_STATE 0x5443
 /******************************************************************************
 **  Type definitions
 ******************************************************************************/
@@ -105,16 +110,62 @@ typedef enum {
     USERIAL_OP_DEASSERT_BT_WAKE,
     USERIAL_OP_GET_BT_WAKE_STATE,
 #endif
+    USERIAL_OP_FLOW_ON,
+    USERIAL_OP_FLOW_OFF,
     USERIAL_OP_NOP,
 } userial_vendor_ioctl_op_t;
 
-/******************************************************************************
-**  Extern variables and functions
-******************************************************************************/
+/* UPIO signals */
+enum {
+    UPIO_BT_WAKE = 0,
+    UPIO_HOST_WAKE,
+    UPIO_LPM_MODE,
+    UPIO_MAX_COUNT
+};
+
+/* UPIO assertion/deassertion */
+enum {
+    UPIO_UNKNOWN = 0,
+    UPIO_DEASSERT,
+    UPIO_ASSERT
+};
+
+#define VND_PORT_NAME_MAXLEN    256
+
+/* vendor serial control block */
+typedef struct
+{
+    int fd;                     /* fd to Bluetooth device */
+    struct termios termios;     /* serial terminal of BT port */
+    char port_name[VND_PORT_NAME_MAXLEN];
+} vnd_userial_cb_t;
+
+typedef struct {
+    uint8_t     ncmd;
+    uint16_t    opcode;
+} __attribute__ ((packed)) evt_cmd_complete;
+
+typedef struct {
+    uint8_t     status;
+    uint8_t     ncmd;
+    uint16_t    opcode;
+} __attribute__ ((packed)) evt_cmd_status;
+
+typedef struct {
+    uint16_t    opcode;
+    uint8_t     plen;
+} __attribute__ ((packed))  hci_command_hdr;
+
+typedef struct {
+    uint8_t     evt;
+    uint8_t     plen;
+} __attribute__ ((packed))  hci_event_hdr;
 
 /******************************************************************************
-**  Functions
+**  Extern
 ******************************************************************************/
+extern vnd_userial_cb_t vnd_userial;
+
 
 /*******************************************************************************
 **
@@ -166,10 +217,20 @@ void userial_vendor_set_baud(uint8_t userial_baud);
 **
 ** Description     ioctl inteface
 **
-** Returns         None
+** Returns         int error
 **
 *******************************************************************************/
-void userial_vendor_ioctl(userial_vendor_ioctl_op_t op, void *p_data);
+int userial_vendor_ioctl(userial_vendor_ioctl_op_t op, int *p_data);
 
-#endif /* USERIAL_VENDOR_H */
+/*******************************************************************************
+**
+** Function        read_hci_event
+**
+** Description     Read HCI event during vendor initialization
+**
+** Returns         int: size to read
+**
+*******************************************************************************/
+int read_hci_event(int fd, unsigned char* buf, int size);
 
+#endif /* HCI_UART_H */

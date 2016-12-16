@@ -18,8 +18,8 @@
 #define BT_VENDOR_QCOM_H
 
 #include "bt_vendor_lib.h"
-#include "vnd_buildcfg.h"
-#include "userial_vendor_qcom.h"
+//#include "vnd_buildcfg.h"
+
 
 #ifndef FALSE
 #define FALSE  0
@@ -29,10 +29,23 @@
 #define TRUE   (!FALSE)
 #endif
 
-// File discriptor using Transport
-extern int fd;
+#define STREAM_TO_UINT16(u16, p) {u16 = ((uint16_t)(*(p)) + (((uint16_t)(*((p) + 1))) << 8)); (p) += 2;}
+#define UINT16_TO_STREAM(p, u16) {*(p)++ = (uint8_t)(u16); *(p)++ = (uint8_t)((u16) >> 8);}
+#define UINT32_TO_STREAM(p, u32) {*(p)++ = (uint8_t)(u32); *(p)++ = (uint8_t)((u32) >> 8); *(p)++ = (uint8_t)((u32) >> 16); *(p)++ = (uint8_t)((u32) >> 24);}
 
-extern bt_hci_transport_device_type bt_hci_transport_device;
+typedef enum {
+    BT_SOC_DEFAULT = 0,
+    BT_SOC_SMD = BT_SOC_DEFAULT,
+    BT_SOC_ROME,
+    BT_SOC_AR3K,
+    /* Add chipset type here */
+    BT_SOC_RESERVED
+}bt_soc_type;
+
+typedef enum {
+    BT_VND_OP_ANT_USERIAL_OPEN = 254,
+    BT_VND_OP_ANT_USERIAL_CLOSE
+}ant_serial;
 
 extern bt_vendor_callbacks_t *bt_vendor_cbacks;
 /* HW_NEED_END_WITH_HCI_RESET
@@ -52,5 +65,5 @@ extern bt_vendor_callbacks_t *bt_vendor_cbacks;
 #define HCI_EVT_CMD_CMPL_STATUS_RET_BYTE   5
 #define HCI_EVT_CMD_CMPL_OPCODE        3
 
-#endif /* BT_VENDOR_BRCM_H */
+#endif /* BT_VENDOR_QCOM_H */
 

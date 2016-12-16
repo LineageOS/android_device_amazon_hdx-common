@@ -16,13 +16,13 @@
 
 /******************************************************************************
  *
- *  Filename:      userial_vendor_qcom.c
+ *  Filename:      hci_smd.c
  *
  *  Description:   Contains vendor-specific userial functions
  *
  ******************************************************************************/
 
-#define LOG_TAG "bt_userial_vendor"
+#define LOG_TAG "bt_vendor"
 
 #include <utils/Log.h>
 #include <termios.h>
@@ -30,63 +30,38 @@
 #include <errno.h>
 #include <stdio.h>
 #include "bt_vendor_qcom.h"
-#include "userial_vendor_qcom.h"
-#include "cutils/properties.h"
+#include "hci_smd.h"
+#include <string.h>
+#include <cutils/properties.h>
 
-bt_hci_transport_device_type bt_hci_set_transport()
-{
-    int ret;
-    char transport_type[PROPERTY_VALUE_MAX] = {0,};
-    bt_hci_transport_device_type bt_hci_transport_device;
-
-    ret = property_get("ro.qualcomm.bt.hci_transport", transport_type, NULL);
-    if(ret == 0)
-        printf("ro.qualcomm.bt.hci_transport not set\n");
-    else
-        printf("ro.qualcomm.bt.hci_transport: %s \n", transport_type);
-
-    if (!strcasecmp(transport_type, "smd"))
-    {
-        bt_hci_transport_device.type = BT_HCI_SMD;
-        bt_hci_transport_device.name = APPS_RIVA_BT_CMD_CH;
-        bt_hci_transport_device.pkt_ind = 1;
-    }
-    else{
-        bt_hci_transport_device.type = BT_HCI_UART;
-        bt_hci_transport_device.name = BT_HS_UART_DEVICE;
-        bt_hci_transport_device.pkt_ind = 0;
-    }
-
-    return bt_hci_transport_device;
-}
-
+/*****************************************************************************
+**   Macros & Constants
+*****************************************************************************/
 #define NUM_OF_DEVS 2
 static char *s_pszDevSmd[] = {
     "/dev/smd3",
     "/dev/smd2"
 };
 
-int bt_hci_init_transport(int *pFd)
-{
-    int i = 0;
-    int fd;
-    for(i=0; i < NUM_OF_DEVS; i++){
-       fd = bt_hci_init_transport_id(i);
-       if(fd < 0 ){
-          return -1;
-       }
-       pFd[i] = fd;
-    }
-    return 0;
-}
+/******************************************************************************
+**  Externs
+******************************************************************************/
+extern int is_bt_ssr_hci;
+
+
+/*****************************************************************************
+**   Functions
+*****************************************************************************/
 
 int bt_hci_init_transport_id (int chId )
 {
   struct termios   term;
   int fd = -1;
   int retry = 0;
+  char ssrvalue[92]= {'\0'};
 
-  if(chId > 2 || chId <0)
+  ssrvalue[0] = '0';
+  if(chId >= 2 || chId <0)
      return -1;
 
   fd = open(s_pszDevSmd[chId], (O_RDWR | O_NOCTTY));
@@ -111,8 +86,26 @@ int bt_hci_init_transport_id (int chId )
      ensure the smd port is successfully opened.
      TODO: Following sleep to be removed once SMD port is successfully
      opened immediately on return from the aforementioned open call */
-  if(BT_HCI_SMD == bt_hci_transport_device.type)
-     usleep(500000);
+
+  property_get("bluetooth.isSSR", ssrvalue, "");
+
+  if(ssrvalue[0] == '1')
+  {
+      /*reset the SSR flag */
+      if(chId == 1)
+      {
+          if(property_set("bluetooth.isSSR", "0") < 0)
+          {
+              ALOGE("SSR: hci_smd.c:SSR case : error in setting up property new\n ");
+          }
+          else
+          {
+              ALOGE("SSR: hci_smd.c:SSR case : Reset the SSr Flag new\n ");
+          }
+      }
+      ALOGE("hci_smd.c:IN SSR sleep for 500 msec New \n");
+      usleep(500000);
+  }
 
   if (tcflush(fd, TCIOFLUSH) < 0)
   {
@@ -144,6 +137,20 @@ int bt_hci_init_transport_id (int chId )
 
   ALOGI("Done intiailizing UART\n");
   return fd;
+}
+
+int bt_hci_init_transport(int *pFd)
+{
+  int i = 0;
+  int fd;
+  for(i=0; i < NUM_OF_DEVS; i++){
+    fd = bt_hci_init_transport_id(i);
+    if(fd < 0 ){
+      return -1;
+    }
+    pFd[i] = fd;
+   }
+   return 0;
 }
 
 int bt_hci_deinit_transport(int *pFd)

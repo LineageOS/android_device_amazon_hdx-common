@@ -5,4 +5,18 @@ type startril_exec, exec_type, file_type;
 init_daemon_domain(startril)
 
 allow startril startril_exec:file rx_file_perms;
-allow startril shell_exec:file { getattr read };
+
+allow startril ctl_rildaemon_prop:property_service set;
+allow startril init:unix_stream_socket connectto;
+allow startril logcat_exec:file { execute execute_no_trans getattr open read };
+allow startril logd:unix_stream_socket connectto;
+allow startril logd_socket:sock_file write;
+allow startril proc:file getattr;
+allow startril property_socket:sock_file write;
+allow startril self:capability { chown fowner fsetid sys_module };
+allow startril shell_exec:file r_file_perms;
+allow startril sysfs_startril:file rw_file_perms;
+allow startril sysfs_startril:dir rw_dir_perms;
+allow startril proc_startril:file r_file_perms;
+allow startril toolbox_exec:file { execute execute_no_trans getattr open read };
+

@@ -27,3 +27,8 @@
 /system/bin/wan_start                 u:object_r:startril_exec:s0
 /system/bin/ath6kl-service            u:object_r:ath6kl-service_exec:s0
 /system/bin/thermal-engine            u:object_r:thermal-engine_exec:s0
+
+# RIL
+/sys/module/rmnet_usb/parameters/rmnet_data_init	u:object_r:sysfs_startril:s0
+/sys/wan						u:object_r:sysfs_startril:s0
+/sys/wan/fw_rdy						u:object_r:sysfs_startril:s0
